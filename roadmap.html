@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShieldTX — Roadmap</title>
+    <meta
+      name="description"
+      content="Vote on what matters most. Help shape ShieldTX by telling us what you want to see built next."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <a class="skip" href="#main">
+        Skip to content
+      </a>
+
+      <header class="header">
+        <div class="container headerInner">
+          <div class="brand" aria-label="ShieldTX">
+            <span class="brandMark" aria-hidden="true"></span>
+            <span class="brandName">ShieldTX</span>
+            <span class="brandTag">Roadmap</span>
+          </div>
+
+          <nav class="nav" aria-label="Primary">
+            <a href="index.html">Home</a>
+            <a href="vault.html">Vault</a>
+            <a href="roadmap.html" aria-current="page">
+              Roadmap
+            </a>
+          </nav>
+
+          <div class="headerCta">
+            <a class="btn btnPrimary" href="index.html#early-access">
+              Request early access
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <main id="main">
+        <section class="section">
+          <div class="container">
+            <div class="sectionHeader">
+              <h2>Roadmap</h2>
+              <p>
+                Vote on what matters most. Help shape ShieldTX by telling us what you want to see built next.
+              </p>
+            </div>
+
+            <div class="roadmapList" role="list" id="roadmapList">
+              <!-- Items will be rendered by JavaScript -->
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container footerInner">
+          <div class="footerBrand">
+            <div class="brandName">ShieldTX</div>
+            <div class="footerNote">Roadmap votes are stored locally in your browser.</div>
+          </div>
+          <div class="footerLinks" aria-label="Footer">
+            <a href="index.html">Home</a>
+            <a href="vault.html">Vault</a>
+            <a href="roadmap.html">Roadmap</a>
+          </div>
+          <div class="footerCopy">© <span id="year"></span> ShieldTX. All rights reserved.</div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // Roadmap data (matching roadmapData.ts)
+      const ROADMAP = [
+        {
+          id: 'execution-privacy',
+          title: 'Execution shielding',
+          description:
+            'Trade without broadcasting your wallet activity. Positions and sizing stay off public trackers while outcomes remain verifiable.',
+        },
+        {
+          id: 'hl-parity',
+          title: 'Fill parity with Hyperliquid',
+          description:
+            'Match native HL execution performance and liquidity. Parity validation is part of onboarding for serious traders and vault managers.',
+        },
+        {
+          id: 'copybot-detection',
+          title: 'Copy-trade exposure report',
+          description:
+            'Detect wallets that mirror your entries/exits within seconds using temporal correlation. Use the report for a personalized demo.',
+        },
+        {
+          id: 'selective-disclosure',
+          title: 'Selective disclosure for vaults',
+          description:
+            'Share PnL and reporting outputs with depositors without exposing positions, timing, or allocation changes to competitors.',
+        },
+        {
+          id: 'shielded-balance',
+          title: 'Shielded balance vault',
+          description:
+            'Funds are represented as shielded notes so only you can see balances and history while trading remains gasless after deposit.',
+        },
+        {
+          id: 'market-limit',
+          title: 'Market & limit orders',
+          description:
+            'Trade the way you want with market execution and limit price control, while keeping your intent private.',
+        },
+        {
+          id: 'realtime-positions',
+          title: 'Real-time position tracking',
+          description:
+            'Track entry, mark price, unrealized PnL, margin, leverage, and liquidation warnings—updated live.',
+        },
+        {
+          id: 'position-management',
+          title: 'Flexible position management',
+          description:
+            'Close partially or fully, adjust leverage and margin, and take profits without revealing your moves publicly.',
+        },
+        {
+          id: 'social-login',
+          title: 'Simple social login',
+          description:
+            'Sign in with Google, Apple, or email. No seed phrases or extensions. Connect a wallet only when you want to deposit.',
+        },
+        {
+          id: 'private-transfers',
+          title: 'Private transfers',
+          description:
+            'Send funds to other ShieldTX users privately and for free—useful for team operations, payouts, and profit splits.',
+        },
+        {
+          id: 'history',
+          title: 'Personal private history',
+          description:
+            'Your deposits, trades, withdrawals, and transfers are visible only to you—useful for performance tracking and tax reporting.',
+        },
+        {
+          id: 'notifications',
+          title: 'Smart notifications',
+          description:
+            'Get alerts for fills, position changes, liquidation proximity, and deposit/withdraw events—without leaking context publicly.',
+        },
+        {
+          id: 'compliance',
+          title: 'Compliance & safety controls',
+          description:
+            'Deposit screening, geo-blocking, optional verification, and viewing keys for audits—built for legitimate use cases.',
+        },
+        {
+          id: 'mobile',
+          title: 'Mobile-friendly design',
+          description:
+            'A responsive interface that works on desktop, tablet, and mobile so you can manage risk on the go.',
+        },
+      ];
+
+      const COUNTS_KEY = 'shieldtx:roadmap:counts:v1';
+      const LIKED_KEY = 'shieldtx:roadmap:liked:v1';
+
+      // Safely parse JSON
+      function safeParseJson(value) {
+        if (!value) return null;
+        try {
+          return JSON.parse(value);
+        } catch {
+          return null;
+        }
+      }
+
+      // Load vote state from localStorage
+      function loadVoteState() {
+        const counts = safeParseJson(localStorage.getItem(COUNTS_KEY)) ?? {};
+        const liked = safeParseJson(localStorage.getItem(LIKED_KEY)) ?? {};
+
+        // Ensure keys exist for known items
+        for (const item of ROADMAP) {
+          if (typeof counts[item.id] !== 'number') counts[item.id] = 0;
+          if (typeof liked[item.id] !== 'boolean') liked[item.id] = false;
+        }
+
+        return { counts, liked };
+      }
+
+      // Save vote state to localStorage
+      function saveVoteState(state) {
+        localStorage.setItem(COUNTS_KEY, JSON.stringify(state.counts));
+        localStorage.setItem(LIKED_KEY, JSON.stringify(state.liked));
+      }
+
+      // State
+      let voteState = loadVoteState();
+      let revealed = {};
+
+      // Render roadmap items
+      function renderRoadmap() {
+        const list = document.getElementById('roadmapList');
+        
+        // Sort by vote count
+        const indexed = ROADMAP.map((item, idx) => ({ item, idx }));
+        indexed.sort((a, b) => {
+          const ca = voteState.counts[a.item.id] ?? 0;
+          const cb = voteState.counts[b.item.id] ?? 0;
+          if (cb !== ca) return cb - ca;
+          return a.idx - b.idx;
+        });
+        const sortedItems = indexed.map((x) => x.item);
+
+        list.innerHTML = sortedItems.map((feature) => {
+          const liked = voteState.liked[feature.id] ?? false;
+          const count = voteState.counts[feature.id] ?? 0;
+          const showCount = revealed[feature.id] ?? false;
+
+          return `
+            <article class="roadmapItem" role="listitem" data-id="${feature.id}">
+              <div class="roadmapText">
+                <h3 class="roadmapTitle">${feature.title}</h3>
+                <p class="roadmapDesc">${feature.description}</p>
+              </div>
+
+              <div class="roadmapVote">
+                <button
+                  type="button"
+                  class="likeBtn ${liked ? 'liked' : ''}"
+                  aria-pressed="${liked}"
+                  aria-label="${liked ? 'Liked' : 'Like this feature'}"
+                  data-id="${feature.id}"
+                >
+                  <span class="likeIcon" aria-hidden="true">♥</span>
+                </button>
+                <div class="likeCount ${showCount ? '' : 'hidden'}">${count} votes</div>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        // Add click handlers
+        list.querySelectorAll('.likeBtn').forEach((btn) => {
+          btn.addEventListener('click', handleVote);
+        });
+      }
+
+      // Handle vote click
+      function handleVote(e) {
+        const btn = e.currentTarget;
+        const id = btn.dataset.id;
+        
+        // Already liked
+        if (voteState.liked[id]) return;
+
+        // Update state
+        revealed[id] = true;
+        voteState.counts[id] = (voteState.counts[id] ?? 0) + 1;
+        voteState.liked[id] = true;
+        
+        // Save to localStorage
+        saveVoteState(voteState);
+        
+        // Re-render
+        renderRoadmap();
+      }
+
+      // Initialize
+      document.addEventListener('DOMContentLoaded', () => {
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Render roadmap
+        renderRoadmap();
+      });
+    </script>
+  </body>
+</html>

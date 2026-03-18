@@ -2,16 +2,780 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ShieldTX — Private, Verifiable Crypto Transactions</title>
     <meta
       name="description"
       content="ShieldTX enables private crypto transactions and privacy-first trading while remaining recorded and verifiable on-chain. Protect your strategy from copy traders."
     />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="page">
+      <a class="skip" href="#main">
+        Skip to content
+      </a>
+
+      <header class="header">
+        <div class="container headerInner">
+          <div class="brand" aria-label="ShieldTX">
+            <span class="brandMark" aria-hidden="true"></span>
+            <span class="brandName">ShieldTX</span>
+            <span class="brandTag">Non-custodial private trading with on-chain verification.</span>
+          </div>
+
+          <nav class="nav" aria-label="Primary">
+            <a href="#features">Features</a>
+            <a href="#comparison">Compare</a>
+            <a href="#fees">Fees</a>
+            <a href="roadmap.html">Roadmap</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+
+          <div class="headerCta">
+            <a class="btn btnPrimary" href="#early-access">
+              Request early access
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <main id="main">
+        <section class="hero">
+          <div class="container heroGrid">
+            <div class="heroCopy">
+              <p class="eyebrow">For copied traders on Hyperliquid</p>
+              <h1>
+                Stop leaking alpha.
+                <br />
+                Keep execution parity.
+              </h1>
+              <p class="lead">
+                Copy-bots mirror entries and front-run exits within seconds. ShieldTX shields your execution so your
+                deposits, positions, and withdrawals aren't linkable on public trackers — while keeping state
+                transitions verifiable via on-chain ZK proofs.
+              </p>
+
+              <div class="heroActions">
+                <a class="btn btnPrimary" href="#early-access">
+                  Request access
+                </a>
+                <a class="btn btnGhost" href="#features">
+                  Explore features
+                </a>
+              </div>
+
+              <div class="pillRow" aria-label="Highlights">
+                <span class="pill">Execution shielding</span>
+                <span class="pill">Fill parity with Hyperliquid</span>
+                <span class="pill">Non-custodial design</span>
+              </div>
+            </div>
+
+            <div class="heroCard" aria-label="Product preview">
+              <div class="heroCardTop">
+                <div class="signal">
+                  <span class="dot dotOk"></span>
+                  Shielded account: active
+                </div>
+                <div class="signal subtle">
+                  <span class="dot dotMuted"></span>
+                  Public trackers: no visibility
+                </div>
+              </div>
+
+              <div class="previewGrid">
+                <div class="miniCard">
+                  <div class="miniK">Detect</div>
+                  <div class="miniV">See who's copying your wallet</div>
+                </div>
+                <div class="miniCard">
+                  <div class="miniK">Trade</div>
+                  <div class="miniV">You trade on HL directly</div>
+                </div>
+                <div class="miniCard">
+                  <div class="miniK">Withdraw</div>
+                  <div class="miniV">ZK-verified, permissionless claims</div>
+                </div>
+                <div class="miniCard">
+                  <div class="miniK">Audit</div>
+                  <div class="miniV">Proofs via viewing keys (optional)</div>
+                </div>
+              </div>
+
+              <div class="pairs" aria-label="Supported pairs">
+                <span class="pair">ETH-PERP</span>
+                <span class="pair">BTC-PERP</span>
+                <span class="pair">SOL-PERP</span>
+                <span class="pair">HYPE-PERP</span>
+                <span class="pair muted">Up to 10×</span>
+              </div>
+            </div>
+          </div>
+          <div class="heroGlow" aria-hidden="true"></div>
+        </section>
+
+        <section id="exposure" class="section sectionSurface" aria-label="Check your exposure">
+          <div class="container">
+            <div class="exposureHeader">
+              <p class="eyebrow">> exposure_scan</p>
+              <h2>Paste your wallet. See who's copying you.</h2>
+              <p class="lead">
+                Real-time analysis of your Hyperliquid on-chain profile. No wallet connection required.
+              </p>
+            </div>
+
+            <div class="exposureScanner">
+              <div class="exposureForm">
+                <input
+                  type="text"
+                  id="walletInput"
+                  class="walletInput"
+                  placeholder="0x..."
+                  pattern="^0x[a-fA-F0-9]{40}$"
+                  spellcheck="false"
+                  autocomplete="off"
+                />
+                <button id="scanBtn" class="btn btnPrimary" disabled>
+                  Scan
+                </button>
+              </div>
+
+              <div id="scanStatus" class="scanStatus hidden">
+                <span class="scanSpinner"></span>
+                <span id="scanStatusText">Analyzing fill patterns...</span>
+              </div>
+            </div>
+
+            <div id="scanResults" class="scanResults hidden">
+              <div class="resultsHeader">
+                <h3>Your exposure report</h3>
+                <p id="resultNote">Based on <span id="fillCount">0</span> fills over 7 days. Account value: <span id="accountValue">$0</span>.</p>
+              </div>
+
+              <div class="resultStats">
+                <div class="resultStat">
+                  <div class="resultStatV" id="correlatedCount">4</div>
+                  <div class="resultStatK">Correlated Wallets</div>
+                </div>
+                <div class="resultStat">
+                  <div class="resultStatV" id="avgLag">4.8s</div>
+                  <div class="resultStatK">Avg Lag Time</div>
+                </div>
+                <div class="resultStat">
+                  <div class="resultStatV" id="alphaLeak">6bps</div>
+                  <div class="resultStatK">Est. Alpha Leakage</div>
+                </div>
+              </div>
+
+              <div class="resultsBody">
+                <div class="correlatedWallets">
+                  <p class="correlatedLabel">Top correlated wallets</p>
+                  <div id="walletList" class="walletList">
+                    <div class="walletItem">
+                      <span class="walletAddr">0x52fc...9630</span>
+                      <span class="walletTrades">42 trades</span>
+                    </div>
+                    <div class="walletItem">
+                      <span class="walletAddr">0xeb85...2fc9</span>
+                      <span class="walletTrades">28 trades</span>
+                    </div>
+                    <div class="walletItem">
+                      <span class="walletAddr">0x0da7...41eb</span>
+                      <span class="walletTrades">22 trades</span>
+                    </div>
+                    <div class="walletItem">
+                      <span class="walletAddr">0x741e...b852</span>
+                      <span class="walletTrades">18 trades</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ecosystemInfo">
+                  <h4>Why this matters</h4>
+                  <div class="toolBadges">
+                    <span class="toolBadge">Dexly</span>
+                    <span class="toolBadge">HyperDash</span>
+                    <span class="toolBadge">CoinGlass</span>
+                    <span class="toolBadge">Nansen</span>
+                    <span class="toolBadge">Hyperbot</span>
+                    <span class="toolBadge">Arkham</span>
+                    <span class="toolBadge">+ 6 more</span>
+                  </div>
+                  <p>
+                    Every open position on Hyperliquid is queryable by anyone, in real-time. 
+                    These wallets are likely following your trades within seconds.
+                  </p>
+
+                  <div class="walletRotationMini">
+                    <p><strong>Wallet rotation doesn't work.</strong> Arkham clusters multi-wallet setups into single entities by funding patterns and trade timing.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="resultsFooter">
+                <p class="resultDisclaimer">Estimated exposure based on simulated analysis. Full correlation scan available in beta.</p>
+                <a class="btn btnPrimary" href="#early-access">
+                  Shield these positions. Request early access.
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" aria-label="Why ShieldTX">
+          <div class="container">
+            <div class="sectionHeader">
+              <h2>Privacy that protects your edge</h2>
+              <p>
+                Copy-trading dashboards and bots (Hyperbot, Dexly, HyperDash, CoinGlass, Nansen, and more) can mirror
+                your moves in seconds — even on mid-sized accounts. ShieldTX removes you from their radar.
+              </p>
+            </div>
+
+            <div class="stats">
+              <div class="stat">
+                <div class="statV">2–60s</div>
+                <div class="statK">Copy-bot lag on entry/exit (typical)</div>
+              </div>
+              <div class="stat">
+                <div class="statV">12+</div>
+                <div class="statK">Copy tools watching Hyperliquid wallets</div>
+              </div>
+              <div class="stat">
+                <div class="statV">Parity</div>
+                <div class="statK">Execution that matches native HL (goal)</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="features" class="section sectionSurface">
+          <div class="container">
+            <div class="sectionHeader">
+              <h2>Key features</h2>
+              <p>
+                Ship privacy where it matters: execution. Keep the speed and liquidity you expect while preventing
+                public wallet tracking and correlation.
+              </p>
+            </div>
+
+            <div class="featureGrid">
+              <article class="card">
+                <h3>Execution shielding</h3>
+                <p>Your positions don't surface on public dashboards — protect entries and exits from mirror bots.</p>
+                <ul class="list">
+                  <li>Hide positions and sizing</li>
+                  <li>Resist clustering & correlation</li>
+                  <li>Preserve alpha for any account size</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <h3>Hyperliquid fill parity</h3>
+                <p>Same markets and execution profile — designed to avoid latency degradation.</p>
+                <ul class="list">
+                  <li>ETH / BTC / SOL / HYPE perps</li>
+                  <li>Market + limit orders</li>
+                  <li>Real-time position tracking</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <h3>Copy-bot resistant by design</h3>
+                <p>Remove the public signal copy tools rely on to mirror your timing and direction.</p>
+                <ul class="list">
+                  <li>Reduce mirroring within seconds</li>
+                  <li>Protect exits from being crowded</li>
+                  <li>Stop "alpha tax" from transparency</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <h3>Simple social login</h3>
+                <p>Sign in with Google, Apple, or email — no extensions, no seed phrases.</p>
+                <ul class="list">
+                  <li>Instant account creation</li>
+                  <li>Connect a wallet only to deposit</li>
+                  <li>Private by default</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <h3>Shielded balance system</h3>
+                <p>Your funds live in a protected vault as untraceable digital notes.</p>
+                <ul class="list">
+                  <li>Deposit from supported chains</li>
+                  <li>Trade without exposing sizes</li>
+                  <li>Withdraw with clean guarantees</li>
+                </ul>
+              </article>
+
+              <article class="card">
+                <h3>Private internal transfers</h3>
+                <p>Move funds to other ShieldTX users privately and for free.</p>
+                <ul class="list">
+                  <li>Free internal transfers</li>
+                  <li>Profit splits & payouts</li>
+                  <li>Personal history stays private</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="split">
+              <div>
+                <h2>How it works</h2>
+                <p>
+                  Shield what's easy to copy, while keeping funds under your control and state transitions verifiable.
+                </p>
+              </div>
+              <ol class="steps">
+                <li class="step">
+                  <div class="stepN">1</div>
+                  <div class="stepBody">
+                    <div class="stepT">Deposit → shielded notes (Arbitrum)</div>
+                    <div class="stepD">
+                      You deposit USDC into an Arbitrum vault contract. Your balance becomes shielded notes you control.
+                    </div>
+                  </div>
+                </li>
+                <li class="step">
+                  <div class="stepN">2</div>
+                  <div class="stepBody">
+                    <div class="stepT">Open position via fresh HL account</div>
+                    <div class="stepD">
+                      A new, unlinkable HL account is created for the position. You sign orders and trade on HL directly.
+                    </div>
+                  </div>
+                </li>
+                <li class="step">
+                  <div class="stepN">3</div>
+                  <div class="stepBody">
+                    <div class="stepT">Close → settle → shielded balance</div>
+                    <div class="stepD">
+                      You close on HL and settlement returns proceeds to shielded notes (escrow + timeout protections).
+                    </div>
+                  </div>
+                </li>
+                <li class="step">
+                  <div class="stepN">4</div>
+                  <div class="stepBody">
+                    <div class="stepT">Withdraw with ZK proofs</div>
+                    <div class="stepD">
+                      Burn notes and claim from the vault using ZK + Merkle proofs. Claiming is permissionless and trustless.
+                    </div>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section id="comparison" class="section sectionSurface">
+          <div class="container">
+            <div class="sectionHeader">
+              <h2>How ShieldTX compares</h2>
+              <p>
+                See how ShieldTX stacks up against direct trading and other privacy solutions across key features that matter most to active traders.
+              </p>
+            </div>
+
+            <div class="tableWrap" role="region" aria-label="Feature comparison">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Feature</th>
+                    <th scope="col">ShieldTX</th>
+                    <th scope="col">Direct Hyperliquid</th>
+                    <th scope="col">Privacy Mixers</th>
+                    <th scope="col">Copy Trading Platforms</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Privacy &amp; Anonymity</strong></td>
+                    <td>✓ Full execution shielding</td>
+                    <td>✗ Publicly visible</td>
+                    <td>✓ Transaction mixing</td>
+                    <td>✗ Public tracking</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Copy-bot Resistance</strong></td>
+                    <td>✓ Protected by design</td>
+                    <td>✗ Easily mirrored</td>
+                    <td>✗ Still traceable</td>
+                    <td>✗ Exposes your strategy</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Execution Quality</strong></td>
+                    <td>✓ Hyperliquid parity</td>
+                    <td>✓ Native execution</td>
+                    <td>✗ Latency &amp; slippage</td>
+                    <td>✗ Variable quality</td>
+                  </tr>
+                  <tr>
+                    <td><strong>User Experience</strong></td>
+                    <td>✓ Social login, no seed phrases</td>
+                    <td>✓ Wallet required</td>
+                    <td>✗ Complex technical setup</td>
+                    <td>✓ Simple but public</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Custody Model</strong></td>
+                    <td>✓ Non-custodial vault</td>
+                    <td>✓ Self-custody</td>
+                    <td>✓ Self-custody</td>
+                    <td>✗ Often custodial</td>
+                  </tr>
+                  <tr>
+                    <td><strong>On-chain Verification</strong></td>
+                    <td>✓ ZK proofs + viewing keys</td>
+                    <td>✓ Fully transparent</td>
+                    <td>✗ No verification</td>
+                    <td>✗ Limited transparency</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Compliance Ready</strong></td>
+                    <td>✓ Built-in sanctions screening</td>
+                    <td>✓ Platform-level</td>
+                    <td>✗ No compliance</td>
+                    <td>✓ Varies by platform</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Internal Transfers</strong></td>
+                    <td>✓ Free &amp; private</td>
+                    <td>✗ Public on-chain</td>
+                    <td>✗ Requires mixing</td>
+                    <td>✗ Platform-dependent</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="note">
+              <strong>Key advantage:</strong> ShieldTX combines the privacy of mixers with the execution quality of native trading, plus built-in compliance and verification features.
+            </div>
+          </div>
+        </section>
+
+        <section id="fees" class="section sectionSurface">
+          <div class="container">
+            <div class="sectionHeader">
+              <h2>Fees &amp; key numbers</h2>
+              <p>Clear costs and operational targets, aligned with the Nightshade trust model.</p>
+            </div>
+
+            <div class="tableWrap" role="region" aria-label="Fees and key numbers">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Deposit fee</td>
+                    <td>Free</td>
+                  </tr>
+                  <tr>
+                    <td>Trading fee</td>
+                    <td>0.05% on open + 0.05% on close</td>
+                  </tr>
+                  <tr>
+                    <td>Withdrawal fee</td>
+                    <td>$2–5 flat</td>
+                  </tr>
+                  <tr>
+                    <td>Position funding latency</td>
+                    <td>Target under 30 seconds</td>
+                  </tr>
+                  <tr>
+                    <td>Withdrawal time</td>
+                    <td>1–2 hours (proving pipeline)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="note">
+              You still trade on Hyperliquid directly. Any Hyperliquid fees apply in addition to the above.
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="callout">
+              <div>
+                <h2>Built-in compliance &amp; safety</h2>
+                <p>
+                  ShieldTX is designed for legitimate traders who value privacy — not for hiding from authorities.
+                </p>
+              </div>
+              <ul class="checklist">
+                <li>Deposit screening against sanctions lists</li>
+                <li>Geographic blocking at the frontend</li>
+                <li>Optional verification for higher limits</li>
+                <li>Viewing keys for audits &amp; reporting</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="early-access" class="section sectionSurface">
+          <div class="container">
+            <div class="cta">
+              <div>
+                <h2>Get a private demo</h2>
+                <p>
+                  Join the waitlist for a personalized walkthrough. We'll show how copy tools can mirror your wallet
+                  — and how ShieldTX blocks the signal.
+                </p>
+              </div>
+              <form class="ctaForm" onsubmit="event.preventDefault()">
+                <label class="srOnly" for="email">
+                  Email address
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  inputmode="email"
+                  placeholder="you@domain.com"
+                  required
+                />
+                <button class="btn btnPrimary" type="submit">
+                  Request demo
+                </button>
+              </form>
+              <p class="fineprint">
+                No spam. One email to schedule. (Hook this form to your backend later.)
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" aria-label="Roadmap participation">
+          <div class="container">
+            <div class="callout">
+              <div>
+                <h2>Help shape the roadmap</h2>
+                <p>
+                  Vote on upcoming features and see what's rising to the top. Your input helps us prioritize what we
+                  ship next.
+                </p>
+              </div>
+              <div>
+                <a class="btn btnPrimary" href="roadmap.html">
+                  Visit Roadmap
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" class="section">
+          <div class="container">
+            <div class="sectionHeader">
+              <h2>FAQ</h2>
+              <p>Answers to the most common questions we hear from active traders.</p>
+            </div>
+
+            <div class="faq">
+              <details class="faqItem">
+                <summary>What exactly is hidden?</summary>
+                <div class="faqBody">
+                  Your wallet identity, deposit/withdraw patterns, position sizes, and trading activity are hidden from
+                  public blockchain observers and copy-trading dashboards.
+                </div>
+              </details>
+
+              <details class="faqItem">
+                <summary>Is anything still verifiable on-chain?</summary>
+                <div class="faqBody">
+                  Yes. ShieldTX is designed so activity can be recorded and verified, with optional proofs and viewing
+                  keys when you need to demonstrate history for audits or compliance.
+                </div>
+              </details>
+
+              <details class="faqItem">
+                <summary>Do I need a wallet or seed phrase?</summary>
+                <div class="faqBody">
+                  Not to get started. You can sign in with Google, Apple, or email. You only connect an external wallet
+                  if and when you want to deposit funds.
+                </div>
+              </details>
+
+              <details class="faqItem">
+                <summary>Which markets are supported?</summary>
+                <div class="faqBody">
+                  ETH-PERP, BTC-PERP, SOL-PERP, and HYPE-PERP with up to 10× leverage, plus market and limit orders.
+                </div>
+              </details>
+
+              <details class="faqItem">
+                <summary>How does this stop copy trading?</summary>
+                <div class="faqBody">
+                  Copy traders rely on quickly identifying and monitoring known wallets. ShieldTX removes your activity
+                  from public view, preventing them from mirroring your entries or front-running exits based on your
+                  on-chain footprint.
+                </div>
+              </details>
+
+              <details class="faqItem">
+                <summary>Will this affect my fills or latency?</summary>
+                <div class="faqBody">
+                  The goal is execution parity with native Hyperliquid — no latency degradation and no "worse fills"
+                  trade-off. We'll validate parity in your demo.
+                </div>
+              </details>
+
+              <details class="faqItem">
+                <summary>Are there gas fees for trading?</summary>
+                <div class="faqBody">
+                  Trading is gasless once your funds are deposited. You only pay network fees when depositing or
+                  withdrawing.
+                </div>
+              </details>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container footerInner">
+          <div class="footerBrand">
+            <div class="brandName">ShieldTX</div>
+            <div class="footerNote">
+              Powered by
+              <a href="https://availproject.org" target="_blank" rel="noreferrer">
+                Avail
+              </a>
+              .
+            </div>
+          </div>
+          <div class="footerLinks" aria-label="Footer">
+            <a href="#features">Features</a>
+            <a href="#comparison">Compare</a>
+            <a href="#fees">Fees</a>
+            <a href="roadmap.html">Roadmap</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div class="footerCopy">© <span id="year"></span> ShieldTX. All rights reserved.</div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Exposure Scanner
+      const walletInput = document.getElementById('walletInput');
+      const scanBtn = document.getElementById('scanBtn');
+      const scanStatus = document.getElementById('scanStatus');
+      const scanStatusText = document.getElementById('scanStatusText');
+      const scanResults = document.getElementById('scanResults');
+      const correlatedCount = document.getElementById('correlatedCount');
+      const avgLag = document.getElementById('avgLag');
+      const alphaLeak = document.getElementById('alphaLeak');
+      const walletList = document.getElementById('walletList');
+      const fillCount = document.getElementById('fillCount');
+      const accountValue = document.getElementById('accountValue');
+
+      const statusMessages = [
+        'Querying on-chain data...',
+        'Analyzing fill patterns...',
+        'Detecting correlated wallets...',
+        'Calculating alpha leakage...',
+        'Building exposure report...'
+      ];
+
+      const simulatedWallets = [
+        { addr: '0x52fc', trades: 42 },
+        { addr: '0xeb85', trades: 28 },
+        { addr: '0x0da7', trades: 22 },
+        { addr: '0x741e', trades: 18 },
+        { addr: '0xa3f9', trades: 15 },
+        { addr: '0xc1d8', trades: 12 },
+        { addr: '0x9e4b', trades: 9 },
+        { addr: '0xf2a6', trades: 6 }
+      ];
+
+      function isValidEthAddress(addr) {
+        return /^0x[a-fA-F0-9]{40}$/.test(addr);
+      }
+
+      function generateRandomResults() {
+        const count = Math.floor(Math.random() * 5) + 2;
+        const wallets = [];
+        const usedIndices = new Set();
+        
+        for (let i = 0; i < count; i++) {
+          let idx;
+          do {
+            idx = Math.floor(Math.random() * simulatedWallets.length);
+          } while (usedIndices.has(idx) && usedIndices.size < simulatedWallets.length);
+          usedIndices.add(idx);
+          
+          const w = simulatedWallets[idx];
+          wallets.push({
+            addr: w.addr + '...' + Math.random().toString(16).slice(2, 6),
+            trades: w.trades + Math.floor(Math.random() * 10)
+          });
+        }
+        
+        return {
+          correlatedWallets: count,
+          avgLag: (Math.random() * 5 + 2).toFixed(1),
+          alphaLeak: Math.floor(Math.random() * 10 + 3),
+          fills: Math.floor(Math.random() * 50) + 10,
+          accountVal: (Math.random() * 100000 + 5000).toFixed(0),
+          wallets: wallets.sort((a, b) => b.trades - a.trades)
+        };
+      }
+
+      function renderResults(data) {
+        correlatedCount.textContent = data.correlatedWallets;
+        avgLag.textContent = data.avgLag + 's';
+        alphaLeak.textContent = data.alphaLeak + 'bps';
+        fillCount.textContent = data.fills;
+        accountValue.textContent = '$' + parseInt(data.accountVal).toLocaleString();
+        
+        walletList.innerHTML = data.wallets.map(w => `
+          <div class="walletItem">
+            <span class="walletAddr">${w.addr}</span>
+            <span class="walletTrades">${w.trades} trades</span>
+          </div>
+        `).join('');
+      }
+
+      walletInput.addEventListener('input', () => {
+        scanBtn.disabled = !isValidEthAddress(walletInput.value);
+      });
+
+      scanBtn.addEventListener('click', async () => {
+        scanBtn.disabled = true;
+        scanStatus.classList.remove('hidden');
+        scanResults.classList.add('hidden');
+
+        for (let i = 0; i < statusMessages.length; i++) {
+          scanStatusText.textContent = statusMessages[i];
+          await new Promise(r => setTimeout(r, 600));
+        }
+
+        const results = generateRandomResults();
+        renderResults(results);
+
+        scanStatus.classList.add('hidden');
+        scanResults.classList.remove('hidden');
+        scanBtn.disabled = false;
+      });
+    </script>
   </body>
 </html>
