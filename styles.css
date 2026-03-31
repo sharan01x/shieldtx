@@ -427,13 +427,29 @@ strong {
 }
 
 .pill {
-  border: 1px solid var(--borderLight);
-  background: var(--bgSecondary);
+  border: 1px solid var(--border);
+  background: transparent;
   color: var(--textSecondary);
   padding: var(--space-xs) var(--space-md);
   font-size: var(--font-xs);
   font-weight: 500;
-  border-radius: 999px;
+  border-radius: 6px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.pill::before {
+  content: '✦';
+  font-size: 8px;
+  opacity: 0.6;
+}
+
+.pill:hover {
+  background: var(--bgSecondary);
+  border-color: var(--textTertiary);
 }
 
 /* Hero Card */
@@ -545,6 +561,12 @@ strong {
   border-bottom: 1px solid var(--borderLight);
 }
 
+.sectionAlt {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bgSecondary) 100%);
+  border-top: 1px solid var(--borderLight);
+  border-bottom: 1px solid var(--borderLight);
+}
+
 .sectionHeader {
   text-align: center;
   max-width: 800px;
@@ -613,6 +635,7 @@ strong {
   color: var(--textSecondary);
   line-height: 1.7;
   margin-bottom: var(--space-lg);
+  font-size: var(--font-md);
 }
 
 .list {
@@ -623,7 +646,7 @@ strong {
 
 .list li {
   margin: var(--space-sm) 0;
-  font-size: var(--font-sm);
+  font-size: var(--font-md);
   color: var(--textSecondary);
   padding-left: var(--space-md);
   position: relative;
@@ -761,8 +784,8 @@ strong {
 /* Pricing */
 .pricingGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-xl);
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
   align-items: start;
 }
 
@@ -770,9 +793,25 @@ strong {
   border: 1px solid var(--borderLight);
   background: var(--surface);
   border-radius: var(--radius-lg);
-  padding: var(--space-2xl);
+  padding: var(--space-xl);
   position: relative;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.pricingCard:first-child {
+  padding: var(--space-lg);
+}
+
+.pricingCard:first-child h3 {
+  font-size: var(--font-md);
+}
+
+.pricingCard:first-child .pricingAmount {
+  font-size: var(--font-2xl);
+}
+
+.pricingCard:first-child .pricingTier {
+  font-size: var(--font-xs);
 }
 
 .pricingCard:hover {
@@ -783,6 +822,7 @@ strong {
 .pricingCard.featured {
   border-color: var(--accent);
   box-shadow: 0 8px 24px rgba(0, 113, 227, 0.15);
+  padding: var(--space-2xl);
 }
 
 .pricingBadge {
@@ -1310,6 +1350,14 @@ strong {
     margin: 0 auto;
   }
   
+  .pricingCard:first-child {
+    padding: var(--space-xl);
+  }
+  
+  .pricingCard.featured {
+    padding: var(--space-2xl);
+  }
+  
   .stats {
     grid-template-columns: 1fr;
   }
@@ -1376,4 +1424,60 @@ strong {
   .roadmapVote {
     justify-items: start;
   }
+}
+
+/* Scroll-based Redaction Effect */
+.redactable {
+  position: relative;
+}
+
+/* Redaction overlay - thick black bar that covers text */
+.redactable.has-redaction {
+  position: relative;
+}
+
+.redaction-overlay {
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  height: 85%;
+  width: calc(100% + 12px);
+  background: #000000;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 100;
+  border-radius: 2px;
+  display: block;
+  content-visibility: visible;
+  transition: width 0.6s ease-out, left 0.6s ease-out;
+  transform-origin: left center;
+}
+
+.redaction-overlay.revealed {
+  width: 0 !important;
+}
+
+/* Light mode uses black, dark mode uses charcoal */
+.themeDark .redaction-overlay {
+  background: rgba(30, 30, 30, 0.98);
+}
+
+/* Ensure headings have thicker overlay */
+h1.redactable .redaction-overlay,
+h2.redactable .redaction-overlay,
+h3.redactable .redaction-overlay {
+  height: 90%;
+  background: #000000;
+}
+
+/* Smaller overlay for smaller text */
+.eyebrow.redactable .redaction-overlay {
+  height: 80%;
+}
+
+/* Dark mode heading overlay stays visible */
+.themeDark h1.redactable .redaction-overlay,
+.themeDark h2.redactable .redaction-overlay,
+.themeDark h3.redactable .redaction-overlay {
+  background: rgba(20, 20, 20, 0.95);
 }

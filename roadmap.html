@@ -44,8 +44,8 @@
         <section class="section">
           <div class="container">
             <div class="sectionHeader">
-              <h2>Roadmap</h2>
-              <p>
+              <h2 class="redactable">Roadmap</h2>
+              <p class="redactable">
                 Vote on what matters most. Help shape ShieldTX by telling us what you want to see built next.
               </p>
             </div>
@@ -274,6 +274,75 @@
         
         // Render roadmap
         renderRoadmap();
+      });
+
+      // Scroll-based Redaction Effect (inverted: starts redacted, reveals on scroll)
+      const redactableElements = document.querySelectorAll('.redactable');
+      
+      // Create redaction overlay spans for each element
+      redactableElements.forEach(el => {
+        // Create overlay element
+        const overlay = document.createElement('span');
+        overlay.className = 'redaction-overlay';
+        
+        // Add random width variation for authentic "hand-applied" redaction look
+        const rect = el.getBoundingClientRect();
+        const variation = 0.85 + Math.random() * 0.35; // 0.85 to 1.2 (±10-20%)
+        const baseWidth = rect.width + 12; // 12px padding from CSS (left: -6px)
+        overlay.style.width = `${baseWidth * variation}px`;
+        
+        el.appendChild(overlay);
+        el.classList.add('has-redaction');
+        
+        // Store reference to overlay on the element
+        el._redactionOverlay = overlay;
+        
+        // Add hover trigger - reveals immediately on mouseover
+        el.addEventListener('mouseover', () => {
+          revealElement(el);
+        });
+      });
+      
+      // Reveal element by adding revealed class and cleanup
+      function revealElement(el) {
+        const overlay = el._redactionOverlay;
+        if (overlay && !overlay.classList.contains('revealed')) {
+          overlay.classList.add('revealed');
+          // Remove after animation completes
+          setTimeout(() => {
+            overlay.remove();
+            el.classList.remove('has-redaction');
+          }, 600);
+        }
+      }
+      
+      // Track if we've already started revealing elements
+      let initialDelayComplete = false;
+      
+      // Delay before elements start revealing via scroll
+      setTimeout(() => {
+        initialDelayComplete = true;
+      }, 1500); // 1.5 second delay before any un-redaction starts
+      
+      const observerCallback = (entries) => {
+        entries.forEach(entry => {
+          // Reveal when element enters viewport (only after initial delay)
+          if (entry.isIntersecting && initialDelayComplete) {
+            revealElement(entry.target);
+          }
+        });
+      };
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '-20px 0px',
+        threshold: 0.2
+      };
+
+      const redactionObserver = new IntersectionObserver(observerCallback, observerOptions);
+      
+      redactableElements.forEach(el => {
+        redactionObserver.observe(el);
       });
     </script>
   </body>
