@@ -464,7 +464,7 @@
       
       const interval = setInterval(() => {
         element.textContent = chars.map((char, i) => {
-          if (char === '\n') return '\n';
+          if (char === '\n' || char === ' ') return char;
           if (i < iteration) return char;
           return randomCipherChar();
         }).join('');
@@ -485,8 +485,8 @@
       }, 25);
     }
     
-    // Initialize visual cipher decode elements — headings only
-    const decodeElements = document.querySelectorAll('h1, h2, h3');
+    // Initialize visual cipher decode elements — h1 only
+    const decodeElements = document.querySelectorAll('h1');
     const decodedTexts = new WeakMap();
     
     decodeElements.forEach(el => {
@@ -494,9 +494,9 @@
       const originalText = el.innerText;
       decodedTexts.set(el, { html: originalHTML, text: originalText });
       
-      // 1:1 cipher mapping — preserve line breaks
+      // 1:1 cipher mapping — preserve spaces and line breaks
       el.textContent = originalText.split('').map(ch =>
-        ch === '\n' ? '\n' : randomCipherChar()
+        (ch === '\n' || ch === ' ') ? ch : randomCipherChar()
       ).join('');
       el.style.whiteSpace = 'pre-line';
       
