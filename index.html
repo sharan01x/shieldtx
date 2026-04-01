@@ -18,31 +18,42 @@
 
     <header class="header">
       <div class="container headerInner">
-        <div class="brand" aria-label="ShieldTX">
-          <a href="index.html">
-            <img src="logoOption3.svg" alt="ShieldTX" class="brandLogo" />
-          </a>
+        <div class="headerBrand">
+          <div class="brand" aria-label="ShieldTX">
+            <a href="index.html">
+              <img src="logoOption3.svg" alt="ShieldTX" class="brandLogo" />
+            </a>
+          </div>
         </div>
 
         <nav class="nav" aria-label="Primary">
+          <div class="navLinks">
           <a href="#features">Features</a>
           <a href="#comparison">Compare</a>
           <a href="#pricing">Pricing</a>
           <a href="roadmap.html">Roadmap</a>
           <a href="#faq">FAQ</a>
+          </div>
         </nav>
 
-        <div class="headerCta">
-          <a class="btn btnPrimary" href="#early-access">
-            Request Access
-          </a>
+        <div class="headerCtaWrapper">
+          <div class="headerCta">
+            <a class="btn btnPrimary headerCtaBtn" href="#early-access">
+              Request Access
+            </a>
+          </div>
         </div>
       </div>
     </header>
 
+    <div class="heroGlow" aria-hidden="true">
+      <canvas id="heroGlowCanvas"></canvas>
+    </div>
+
     <main id="main">
       <section class="hero">
-        <div class="container heroGrid">
+        <div class="heroContent">
+          <div class="container heroGrid">
           <div class="heroCopy">
             <p class="eyebrow decode-text">For traders who hate being copied</p>
             <h1 class="decode-text">
@@ -56,10 +67,10 @@
 
             <div class="heroActions">
               <a class="btn btnPrimary" href="#early-access">
-                Request access
+                Request Access
               </a>
               <a class="btn btnGhost" href="#features">
-                Explore features
+                Explore Features
               </a>
             </div>
 
@@ -110,12 +121,9 @@
             </div>
           </div>
         </div>
-        <div class="heroGlow" aria-hidden="true">
-          <canvas id="heroGlowCanvas"></canvas>
-        </div>
       </section>
 
-      <section id="exposure" class="section sectionSurface" aria-label="Check your exposure">
+      <section id="exposure" class="section sectionNavy" aria-label="Check your exposure">
         <div class="container">
           <div class="sectionHeader">
             <h2 class="decode-text">Copy-paste your address to see who's copy-pasting your trades</h2>
@@ -463,61 +471,22 @@
         </div>
       </section>
 
-      <section id="pricing" class="section sectionSurface">
+      <section id="pricing" class="section sectionNavy">
         <div class="container">
           <div class="sectionHeader">
             <h2 class="decode-text">Copy-bots cost you 5-15 bps per trade. ShieldTX costs less.</h2>
             <p class="decode-text">All tiers free during private beta.</p>
           </div>
 
-          <div class="pricingGrid">
-            <div class="pricingCard">
-              <h3>Starter</h3>
-              <div class="pricingAmount">Free</div>
-              <div class="pricingTier">&lt;$10K/mo</div>
-              <ul class="pricingFeatures">
-                <li>Shielded execution on 5 markets</li>
-                <li>Basic exposure scan</li>
-                <li>Community Discord</li>
-              </ul>
-            </div>
-
-            <div class="pricingCard featured">
-              <div class="pricingBadge">Most popular</div>
-              <h3>Pro</h3>
-              <div class="pricingAmount">$99/mo</div>
-              <div class="pricingTier">$10K-$500K/mo</div>
-              <ul class="pricingFeatures">
-                <li>Shielded execution on all markets</li>
-                <li>Full correlation scan</li>
-                <li>Priority fills</li>
-                <li>Email support</li>
-              </ul>
-            </div>
-
-            <div class="pricingCard">
-              <h3>Whale</h3>
-              <div class="pricingAmount">0.15% vol</div>
-              <div class="pricingTier">$500K-$5M/mo</div>
-              <ul class="pricingFeatures">
-                <li>Everything in Pro</li>
-                <li>Dedicated execution path</li>
-                <li>Custom shielding rules</li>
-                <li>Direct Telegram support</li>
-              </ul>
-            </div>
-
-            <div class="pricingCard">
-              <h3>Enterprise</h3>
-              <div class="pricingAmount">Custom</div>
-              <div class="pricingTier">$5M+/mo</div>
-              <ul class="pricingFeatures">
-                <li>Everything in Whale</li>
-                <li>Multi-account shielding</li>
-                <li>API access</li>
-                <li>SLA guarantee</li>
-              </ul>
-            </div>
+          <div class="pricingSingle">
+            <div class="pricingSingleAmount">Free during beta</div>
+            <div class="pricingSingleTagline">Shield TX is free while we build. Launch pricing coming soon.</div>
+            <ul class="pricingSingleFeatures">
+              <li>Shielded execution on all markets</li>
+              <li>Full correlation scan</li>
+              <li>Priority fills</li>
+              <li>Email support</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -542,7 +511,7 @@
         </div>
       </section>
 
-      <section id="early-access" class="section sectionSurface">
+      <section id="early-access" class="section">
         <div class="container">
           <div class="cta">
             <div>
@@ -569,7 +538,7 @@
         </div>
       </section>
 
-      <section id="faq" class="section">
+      <section id="faq" class="section sectionSurface">
         <div class="container">
           <div class="sectionHeader">
             <h2 class="decode-text">Questions. Answered.</h2>
@@ -895,11 +864,11 @@
       // Navy #151F28, Red Signal #EC3910, Blue Electric #231EF7
       // Cyan #00E5FF, Pink #FF1493
       const blobs = [
-        { homeX: 0.15, homeY: 0.15, x: 0.15, y: 0.15, radius: 0.5, color: [21, 31, 40], freq: 0.0006 },   // Navy
-        { homeX: 0.25, homeY: 0.45, x: 0.25, y: 0.45, radius: 0.45, color: [236, 57, 16], freq: 0.001 },  // Red Signal
+        { homeX: 0.80, homeY: 0.70, x: 0.80, y: 0.70, radius: 0.5, color: [21, 31, 40], freq: 0.0006 },   // Navy
+        { homeX: 0.15, homeY: 0.15, x: 0.15, y: 0.15, radius: 0.45, color: [236, 57, 16], freq: 0.001 },  // Red Signal
         { homeX: 0.55, homeY: 0.30, x: 0.55, y: 0.30, radius: 0.40, color: [35, 30, 247], freq: 0.0007 }, // Blue Electric
-        { homeX: 0.70, homeY: 0.20, x: 0.70, y: 0.20, radius: 0.35, color: [0, 229, 255], freq: 0.0009 }, // Cyan
-        { homeX: 0.80, homeY: 0.70, x: 0.80, y: 0.70, radius: 0.40, color: [255, 20, 147], freq: 0.0008 },// Pink
+        { homeX: 0.25, homeY: 0.45, x: 0.25, y: 0.45, radius: 0.35, color: [0, 229, 255], freq: 0.0009 }, // Cyan
+        { homeX: 0.70, homeY: 0.20, x: 0.70, y: 0.20, radius: 0.40, color: [255, 20, 147], freq: 0.0008 },// Pink
       ];
 
       // Resize canvas to match container

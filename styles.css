@@ -11,7 +11,7 @@
 
 :root {
   /* ShieldTX brand color palette */
-  --bg: #ffffff;
+  --bg: #f5f5f7;
   --bgSecondary: #f5f5f7;
   --surface: #ffffff;
   --surfaceElevated: #ffffff;
@@ -68,10 +68,10 @@
   
   /* Layout */
   --container: 1200px;
-  --radius-sm: 5px;
-  --radius-md: 5px;
-  --radius-lg: 5px;
-  --radius-xl: 5px;
+  --radius-sm: 12px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 16px;
   
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
@@ -106,7 +106,6 @@
 
 /* Callout box */
 .callout {
-  border: 1px solid var(--borderLight);
   background: var(--surface);
   border-radius: var(--radius-xl);
   padding: var(--space-2xl);
@@ -153,23 +152,29 @@
    Slow ambient loop using brand colors with canvas-based animation
    ═══════════════════════════════════════════════════════════════ */
 
-/* Hero glow container */
+/* Glow - full page background */
 .heroGlow {
   position: absolute;
-  inset: -100px;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 90vh;
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
   overflow: hidden;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
 }
 
 /* Canvas element for organic animation */
 .heroGlow canvas {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   filter: blur(60px);
-  transform: scale(1.2);
+  transform: scale(1.1);
   opacity: 0.5;
 }
 
@@ -194,15 +199,17 @@
   background: 
     radial-gradient(ellipse 60% 40% at 20% 30%, rgba(0, 229, 255, 0.25), transparent),
     radial-gradient(ellipse 50% 50% at 70% 40%, rgba(35, 30, 247, 0.2), transparent),
-    radial-gradient(ellipse 40% 60% at 40% 70%, rgba(255, 20, 147, 0.15), transparent);
+    radial-gradient(ellipse 40% 60% at 40% 70%, rgba(255, 20, 147, 0.15), transparent),
+    linear-gradient(180deg, rgba(231, 233, 242, 0) 0%, rgba(231, 233, 242, 0.3) 70%, rgba(231, 233, 242, 1) 100%);
   animation: shieldGlowOrg1 12s ease-in-out infinite alternate;
 }
 
 .heroGlowFallback::after {
   background: 
+    radial-gradient(ellipse 45% 45% at 20% 25%, rgba(0, 102, 255, 0.18), transparent),
     radial-gradient(ellipse 70% 30% at 80% 20%, rgba(236, 57, 16, 0.12), transparent),
-    radial-gradient(ellipse 45% 45% at 30% 60%, rgba(0, 102, 255, 0.18), transparent),
-    radial-gradient(ellipse 55% 35% at 60% 80%, rgba(21, 31, 40, 0.15), transparent);
+    radial-gradient(ellipse 55% 35% at 60% 90%, rgba(21, 31, 40, 0.15), transparent),
+    linear-gradient(180deg, rgba(231, 233, 242, 0) 0%, rgba(231, 233, 242, 0.3) 70%, rgba(231, 233, 242, 1) 100%);
   animation: shieldGlowOrg2 15s ease-in-out infinite alternate-reverse;
 }
 
@@ -292,6 +299,7 @@ html {
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -435,14 +443,20 @@ strong {
 
 /* Header */
 .header {
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid var(--borderLight);
-  transition: background 0.3s ease, border-color 0.3s ease;
+  transition: border-color 0.3s ease;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
 }
 
 .themeDark .header {
@@ -454,8 +468,7 @@ strong {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-lg);
-  padding: var(--space-md) 0;
-  height: 64px;
+  padding: var(--space-xl) 0;
 }
 
 .brand {
@@ -480,7 +493,7 @@ strong {
 }
 
 .brandLogo {
-  height: 60px;
+  height: 50px;
   width: auto;
   vertical-align: middle;
 }
@@ -488,6 +501,18 @@ strong {
 .nav {
   display: flex;
   gap: var(--space-2xl);
+  align-items: center;
+}
+
+.navLinks {
+  display: flex;
+  gap: var(--space-2xl);
+  margin-top: 20px;
+}
+
+.headerBrand,
+.headerCtaWrapper {
+  margin-top: 20px;
 }
 
 .nav a {
@@ -506,13 +531,26 @@ strong {
   gap: var(--space-md);
 }
 
+/* Header CTA button keeps blue-electric style */
+.headerCtaBtn {
+  background: var(--blue-electric);
+  color: #ffffff;
+  padding: var(--space-sm) var(--space-lg);
+}
+
+.headerCtaBtn:hover {
+  background: #1a14e8;
+  color: #ffffff;
+  transform: scale(1.02);
+}
+
 /* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-lg);
+  padding: 12px 24px;
   font-size: var(--font-sm);
   font-weight: 500;
   border-radius: var(--radius-md);
@@ -529,7 +567,7 @@ strong {
 }
 
 .btnPrimary {
-  background: var(--blue-electric);
+  background: var(--navy);
   color: #ffffff;
 }
 
@@ -562,8 +600,18 @@ strong {
 /* Hero Section */
 .hero {
   position: relative;
-  padding: var(--space-4xl) 0 var(--space-3xl);
+  overflow: visible;
+  background: transparent;
+  margin: var(--space-xl);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  border-radius: var(--radius-xl);
   overflow: hidden;
+  background: var(--surface);
+  padding: var(--space-4xl) 0 var(--space-3xl);
 }
 
 .heroGrid {
@@ -739,15 +787,10 @@ strong {
 }
 
 .sectionSurface {
-  background: var(--bgSecondary);
-  border-top: 1px solid var(--borderLight);
-  border-bottom: 1px solid var(--borderLight);
-}
-
-.sectionAlt {
-  background: linear-gradient(180deg, var(--bg) 0%, var(--bgSecondary) 100%);
-  border-top: 1px solid var(--borderLight);
-  border-bottom: 1px solid var(--borderLight);
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  margin: 0 var(--space-xl) var(--space-xl);
+  padding: var(--space-4xl) 0;
 }
 
 .sectionHeader {
@@ -965,99 +1008,36 @@ strong {
 }
 
 /* Pricing */
-.pricingGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-lg);
-  align-items: start;
+.pricingSingle {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.pricingCard {
-  border: 1px solid var(--borderLight);
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  position: relative;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.pricingCard:first-child {
-  padding: var(--space-lg);
-}
-
-.pricingCard:first-child h3 {
-  font-size: var(--font-md);
-}
-
-.pricingCard:first-child .pricingAmount {
-  font-size: var(--font-2xl);
-}
-
-.pricingCard:first-child .pricingTier {
-  font-size: var(--font-xs);
-}
-
-.pricingCard:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-}
-
-.pricingCard.featured {
-  border-color: var(--accent);
-  box-shadow: 0 8px 24px rgba(0, 113, 227, 0.15);
-  padding: var(--space-2xl);
-}
-
-.pricingBadge {
-  position: absolute;
-  top: var(--space-md);
-  right: var(--space-md);
-  background: var(--accent);
-  color: #ffffff;
-  font-size: var(--font-xs);
-  font-weight: 600;
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: 999px;
-}
-
-.pricingCard h3 {
-  margin-bottom: var(--space-sm);
-  font-size: var(--font-xl);
-}
-
-.pricingAmount {
+.pricingSingleAmount {
   font-size: var(--font-3xl);
   font-weight: 700;
   color: var(--textPrimary);
-  margin-bottom: var(--space-xs);
+  margin-bottom: var(--space-sm);
 }
 
-.pricingTier {
-  color: var(--textTertiary);
-  font-size: var(--font-sm);
+.pricingSingleTagline {
+  color: var(--textSecondary);
   margin-bottom: var(--space-xl);
 }
 
-.pricingFeatures {
-  margin: 0;
-  padding: 0;
+.pricingSingleFeatures {
   list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
-.pricingFeatures li {
-  margin: var(--space-sm) 0;
-  font-size: var(--font-sm);
+.pricingSingleFeatures li {
   color: var(--textSecondary);
-  padding-left: var(--space-lg);
-  position: relative;
-}
-
-.pricingFeatures li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--success);
-  font-weight: 600;
+  font-size: var(--font-sm);
 }
 
 /* FAQ */
@@ -1111,9 +1091,80 @@ strong {
   font-size: var(--font-sm);
 }
 
-/* CTA Section */
+/* Navy section variant for Exposure and Pricing */
+.sectionNavy {
+  background: var(--navy);
+  color: var(--grey);
+  border-radius: var(--radius-xl);
+  margin: 0 var(--space-xl) var(--space-xl);
+}
+
+.sectionNavy .sectionHeader h2,
+.sectionNavy .sectionHeader p,
+.sectionNavy .lead,
+.sectionNavy h2,
+.sectionNavy h3,
+.sectionNavy p {
+  color: var(--grey);
+}
+
+.sectionNavy .miniK,
+.sectionNavy .miniV,
+.sectionNavy .pricingSingleAmount,
+.sectionNavy .pricingSingleTagline,
+.sectionNavy .pricingSingleFeatures li {
+  color: var(--grey);
+}
+
+.sectionNavy .miniCard {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.sectionNavy .resultStat {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.sectionNavy .resultStatV,
+.sectionNavy .resultStatK {
+  color: var(--grey);
+}
+
+.sectionNavy .walletItem {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sectionNavy .walletAddr,
+.sectionNavy .walletTrades {
+  color: var(--grey);
+}
+
+.sectionNavy .toolBadge {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--grey);
+}
+
+.sectionNavy .correlatedLabel {
+  color: var(--grey);
+}
+
+.sectionNavy .ecosystemInfo h4 {
+  color: var(--grey);
+}
+
+.sectionNavy .walletRotationMini {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sectionNavy .walletRotationMini p {
+  color: var(--grey);
+}
+
+.sectionNavy .resultDisclaimer {
+  color: rgba(231, 233, 242, 0.7);
+}
 .cta {
-  border: 1px solid var(--borderLight);
   background: var(--surface);
   border-radius: var(--radius-xl);
   padding: var(--space-3xl);
@@ -1166,7 +1217,6 @@ strong {
 
 /* Footer */
 .footer {
-  border-top: 1px solid var(--borderLight);
   padding: var(--space-2xl) 0;
   margin-top: var(--space-4xl);
 }
@@ -1527,20 +1577,6 @@ strong {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  .pricingGrid {
-    grid-template-columns: 1fr;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .pricingCard:first-child {
-    padding: var(--space-xl);
-  }
-  
-  .pricingCard.featured {
-    padding: var(--space-2xl);
-  }
-  
   .stats {
     grid-template-columns: 1fr;
   }
@@ -1608,7 +1644,7 @@ strong {
   .resultStats {
     grid-template-columns: 1fr;
   }
-  
+
   .roadmapItem {
     grid-template-columns: 1fr;
   }
