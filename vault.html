@@ -43,13 +43,13 @@
         <section class="hero">
           <div class="container heroGrid">
             <div class="heroCopy">
-              <p class="eyebrow redactable">For Hyperliquid vault managers</p>
-              <h1 class="redactable">
+              <p class="eyebrow decode-text">For Hyperliquid vault managers</p>
+              <h1 class="decode-text">
                 Run a transparent fund.
                 <br />
                 Keep the strategy private.
               </h1>
-              <p class="lead redactable">
+              <p class="lead decode-text">
                 Hyperliquid vaults are public by design — positions, allocations, and timing can be reverse-engineered.
                 ShieldTX provides shielded execution for vault trades so competitors can't front-run your book, while
                 enabling selective disclosure of performance to depositors. Funds remain under your control via an
@@ -109,14 +109,16 @@
               </div>
             </div>
           </div>
-          <div class="heroGlow" aria-hidden="true"></div>
+          <div class="heroGlow" aria-hidden="true">
+            <canvas id="heroGlowCanvas"></canvas>
+          </div>
         </section>
 
         <section class="section" aria-label="Why vault managers choose ShieldTX">
           <div class="container">
             <div class="sectionHeader">
-              <h2 class="redactable">Protect the business model</h2>
-              <p class="redactable">
+              <h2 class="decode-text">Protect the business model</h2>
+              <p class="decode-text">
                 Vaults are benchmarked in public. If competitors can copy your entries, front-run your exits, or
                 replicate allocations, LP capital takes a hit for reasons unrelated to market performance.
               </p>
@@ -142,14 +144,14 @@
         <section id="features" class="section sectionSurface">
           <div class="container">
             <div class="sectionHeader">
-              <h2 class="redactable">Key features for vault operations</h2>
-              <p class="redactable">Ship privacy where it matters, while keeping investor-facing transparency where it's required.</p>
+              <h2 class="decode-text">Key features for vault operations</h2>
+              <p class="decode-text">Ship privacy where it matters, while keeping investor-facing transparency where it's required.</p>
             </div>
 
             <div class="featureGrid">
               <article class="card">
-                <h3 class="redactable">Shielded execution for vault trades</h3>
-                <p class="redactable">Vault trades don't surface as a public position feed competitors can replay.</p>
+                <h3 class="decode-text">Shielded execution for vault trades</h3>
+                <p class="decode-text">Vault trades don't surface as a public position feed competitors can replay.</p>
                 <ul class="list">
                   <li>Hide position timing and sizing</li>
                   <li>Reduce front-running &amp; crowding</li>
@@ -158,8 +160,8 @@
               </article>
 
               <article class="card">
-                <h3 class="redactable">Selective disclosure</h3>
-                <p class="redactable">Show depositors what they need (PnL, reporting) without exposing positions.</p>
+                <h3 class="decode-text">Selective disclosure</h3>
+                <p class="decode-text">Show depositors what they need (PnL, reporting) without exposing positions.</p>
                 <ul class="list">
                   <li>Performance visibility for LPs</li>
                   <li>Private positions by default</li>
@@ -168,8 +170,8 @@
               </article>
 
               <article class="card">
-                <h3 class="redactable">Execution parity is non-negotiable</h3>
-                <p class="redactable">Vault performance is benchmarked against native HL — parity is the bar.</p>
+                <h3 class="decode-text">Execution parity is non-negotiable</h3>
+                <p class="decode-text">Vault performance is benchmarked against native HL — parity is the bar.</p>
                 <ul class="list">
                   <li>No latency degradation (goal)</li>
                   <li>Same markets &amp; order types</li>
@@ -178,8 +180,8 @@
               </article>
 
               <article class="card">
-                <h3 class="redactable">Operational controls</h3>
-                <p class="redactable">Built for legitimate managers operating at scale.</p>
+                <h3 class="decode-text">Operational controls</h3>
+                <p class="decode-text">Built for legitimate managers operating at scale.</p>
                 <ul class="list">
                   <li>Deposit screening</li>
                   <li>Geographic restrictions</li>
@@ -188,8 +190,8 @@
               </article>
 
               <article class="card">
-                <h3 class="redactable">Clean withdrawal guarantees</h3>
-                <p class="redactable">Withdrawals designed to avoid obvious linkage back to prior activity.</p>
+                <h3 class="decode-text">Clean withdrawal guarantees</h3>
+                <p class="decode-text">Withdrawals designed to avoid obvious linkage back to prior activity.</p>
                 <ul class="list">
                   <li>Predictable withdrawal paths</li>
                   <li>Auditable when required</li>
@@ -198,8 +200,8 @@
               </article>
 
               <article class="card">
-                <h3 class="redactable">Fast onboarding</h3>
-                <p class="redactable">Reduce ops overhead with simple login and controlled wallet connectivity.</p>
+                <h3 class="decode-text">Fast onboarding</h3>
+                <p class="decode-text">Reduce ops overhead with simple login and controlled wallet connectivity.</p>
                 <ul class="list">
                   <li>Google / Apple / email</li>
                   <li>Connect wallet only to deposit</li>
@@ -214,8 +216,8 @@
           <div class="container">
             <div class="split">
               <div>
-                <h2 class="redactable">Selective disclosure model</h2>
-                <p class="redactable">
+                <h2 class="decode-text">Selective disclosure model</h2>
+                <p class="decode-text">
                   Investors want transparency. Competitors want your book. ShieldTX separates those two needs so you can
                   publish performance without donating your edge.
                 </p>
@@ -257,8 +259,8 @@
         <section class="section sectionSurface">
           <div class="container">
             <div class="sectionHeader">
-              <h2 class="redactable">Pricing that scales with AUM</h2>
-              <p class="redactable">
+              <h2 class="decode-text">Pricing that scales with AUM</h2>
+              <p class="decode-text">
                 Vault managers pay for structural protection — not cosmetics. Execution parity is the bar; pricing is
                 sized to AUM and operational needs.
               </p>
@@ -305,8 +307,8 @@
           <div class="container">
             <div class="cta">
               <div>
-                <h2 class="redactable">Get a vault leakage report</h2>
-                <p class="redactable">
+                <h2 class="decode-text">Get a vault leakage report</h2>
+                <p class="decode-text">
                   Join the waitlist for a 1:1 demo. We'll show which wallets are opening identical positions within
                   seconds of your vault — and validate execution parity.
                 </p>
@@ -337,8 +339,8 @@
           <div class="container">
             <div class="callout">
               <div>
-                <h2 class="redactable">Prioritize what we build next</h2>
-                <p class="redactable">
+                <h2 class="decode-text">Prioritize what we build next</h2>
+                <p class="decode-text">
                   Vault managers have the highest structural need for privacy. Vote on roadmap items to help prioritize
                   vault features like selective disclosure and parity tooling.
                 </p>
@@ -355,8 +357,8 @@
         <section id="faq" class="section">
           <div class="container">
             <div class="sectionHeader">
-              <h2 class="redactable">FAQ</h2>
-              <p class="redactable">Vault-specific questions we hear from managers and LPs.</p>
+              <h2 class="decode-text">FAQ</h2>
+              <p class="decode-text">Vault-specific questions we hear from managers and LPs.</p>
             </div>
 
             <div class="faq">
@@ -431,74 +433,167 @@
       // Set current year in footer
       document.getElementById('year').textContent = new Date().getFullYear();
 
-      // Scroll-based Redaction Effect (inverted: starts redacted, reveals on scroll)
-      const redactableElements = document.querySelectorAll('.redactable');
+    // ═══════════════════════════════════════════════
+    // Visual Cipher Decode Effect
+    // - Text appears as scrambled cipher characters that decode to real text
+    // - Triggers on hover or scroll into view
+    // ═══════════════════════════════════════════════
+    
+    // Visual cipher character set (hex + symbols for scrambeled look)
+    const CIPHER_CHARS = '0123456789ABCDEF#@%&?!';
+    
+    // Generate random cipher string (1:1 mapping with original length)
+    function codedString(length) {
+      let s = '';
+      for (let i = 0; i < length; i++) {
+        s += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
+      }
+      return s;
+    }
+    
+    // Get random cipher character
+    function randomCipherChar() {
+      return CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
+    }
+    
+    // Decode text animation - character-by-character reveal
+    function decodeText(element, targetText) {
+      const chars = targetText.split('');
+      let iteration = 0;
+      const maxIterations = chars.length;
       
-      // Create redaction overlay spans for each element
-      redactableElements.forEach(el => {
-        // Create overlay element
-        const overlay = document.createElement('span');
-        overlay.className = 'redaction-overlay';
+      const interval = setInterval(() => {
+        element.textContent = chars.map((char, i) => {
+          if (char === '\n') return '\n';
+          if (i < iteration) return char;
+          return randomCipherChar();
+        }).join('');
         
-        // Add random width variation for authentic "hand-applied" redaction look
-        const rect = el.getBoundingClientRect();
-        const variation = 0.85 + Math.random() * 0.35; // 0.85 to 1.2 (±10-20%)
-        const baseWidth = rect.width + 12; // 12px padding from CSS (left: -6px)
-        overlay.style.width = `${baseWidth * variation}px`;
+        iteration += 3;
         
-        el.appendChild(overlay);
-        el.classList.add('has-redaction');
-        
-        // Store reference to overlay on the element
-        el._redactionOverlay = overlay;
-        
-        // Add hover trigger - reveals immediately on mouseover
-        el.addEventListener('mouseover', () => {
-          revealElement(el);
-        });
-      });
-      
-      // Reveal element by adding revealed class and cleanup
-      function revealElement(el) {
-        const overlay = el._redactionOverlay;
-        if (overlay && !overlay.classList.contains('revealed')) {
-          overlay.classList.add('revealed');
-          // Remove after animation completes
-          setTimeout(() => {
-            overlay.remove();
-            el.classList.remove('has-redaction');
-          }, 600);
+        if (iteration > maxIterations) {
+          clearInterval(interval);
+          const stored = decodedTexts.get(element);
+          if (stored && stored.html) {
+            element.innerHTML = stored.html;
+          } else {
+            element.textContent = targetText;
+          }
+          element.style.whiteSpace = '';
+          element.classList.add('decoded');
         }
+      }, 25);
+    }
+    
+    // Initialize visual cipher decode elements — headings only
+    const decodeElements = document.querySelectorAll('h1, h2, h3');
+    const decodedTexts = new WeakMap();
+    
+    decodeElements.forEach(el => {
+      const originalHTML = el.innerHTML;
+      const originalText = el.innerText;
+      decodedTexts.set(el, { html: originalHTML, text: originalText });
+      
+      // 1:1 cipher mapping — preserve line breaks
+      el.textContent = originalText.split('').map(ch =>
+        ch === '\n' ? '\n' : randomCipherChar()
+      ).join('');
+      el.style.whiteSpace = 'pre-line';
+      
+      // Decode on hover
+      el.addEventListener('mouseenter', () => {
+        if (!el.classList.contains('decoded')) {
+          decodeText(el, originalText);
+        }
+      });
+    });
+    
+    // Intersection Observer for scroll-triggered decode
+    let decodeDelayComplete = false;
+    setTimeout(() => { decodeDelayComplete = true; }, 1000);
+    
+    const decodeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && decodeDelayComplete) {
+          const el = entry.target;
+          const stored = decodedTexts.get(el);
+          if (!el.classList.contains('decoded') && stored) {
+            decodeText(el, stored.text);
+          }
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '-20px 0px' });
+    
+    decodeElements.forEach(el => decodeObserver.observe(el));
+
+    // ═══════════════════════════════════════════════════════════════
+    // ShieldGlow Animated - Organic Color Drift Canvas Animation
+    // From brand book: slow ambient loop using brand colors
+    // ═══════════════════════════════════════════════════════════════
+    (function initShieldGlow() {
+      const canvas = document.getElementById('heroGlowCanvas');
+      if (!canvas) return;
+      
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      // Brand colors from brandbook (normalized for rgba)
+      // Navy #151F28, Red Signal #EC3910, Blue Electric #231EF7
+      // Cyan #00E5FF, Pink #FF1493
+      const blobs = [
+        { homeX: 0.15, homeY: 0.15, x: 0.15, y: 0.15, radius: 0.5, color: [21, 31, 40], freq: 0.0006 },   // Navy
+        { homeX: 0.25, homeY: 0.45, x: 0.25, y: 0.45, radius: 0.45, color: [236, 57, 16], freq: 0.001 },  // Red Signal
+        { homeX: 0.55, homeY: 0.30, x: 0.55, y: 0.30, radius: 0.40, color: [35, 30, 247], freq: 0.0007 }, // Blue Electric
+        { homeX: 0.70, homeY: 0.20, x: 0.70, y: 0.20, radius: 0.35, color: [0, 229, 255], freq: 0.0009 }, // Cyan
+        { homeX: 0.80, homeY: 0.70, x: 0.80, y: 0.70, radius: 0.40, color: [255, 20, 147], freq: 0.0008 },// Pink
+      ];
+
+      // Resize canvas to match container
+      function resize() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
       }
       
-      // Track if we've already started revealing elements
-      let initialDelayComplete = false;
-      
-      // Delay before elements start revealing via scroll
-      setTimeout(() => {
-        initialDelayComplete = true;
-      }, 1500); // 1.5 second delay before any un-redaction starts
-      
-      const observerCallback = (entries) => {
-        entries.forEach(entry => {
-          // Reveal when element enters viewport (only after initial delay)
-          if (entry.isIntersecting && initialDelayComplete) {
-            revealElement(entry.target);
-          }
-        });
-      };
+      // Initial resize and on window resize
+      resize();
+      window.addEventListener('resize', resize);
+      resize();
+      window.addEventListener('resize', resize);
 
-      const observerOptions = {
-        root: null,
-        rootMargin: '-20px 0px',
-        threshold: 0.2
-      };
+      // Animation loop - organic color drift
+      function animate(time) {
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
 
-      const redactionObserver = new IntersectionObserver(observerCallback, observerOptions);
-      
-      redactableElements.forEach(el => {
-        redactionObserver.observe(el);
-      });
+        for (const blob of blobs) {
+          // Organic movement using sine waves at different frequencies
+          const targetX = blob.homeX + Math.sin(time * blob.freq) * 0.12;
+          const targetY = blob.homeY + Math.cos(time * blob.freq * 1.3) * 0.12;
+          
+          // Smooth easing toward target
+          blob.x += (targetX - blob.x) * 0.02;
+          blob.y += (targetY - blob.y) * 0.02;
+
+          const radius = blob.radius * Math.min(w, h);
+          
+          // Create radial gradient
+          const gradient = ctx.createRadialGradient(
+            blob.x * w, blob.y * h, 0,
+            blob.x * w, blob.y * h, radius
+          );
+          
+          gradient.addColorStop(0, `rgba(${blob.color[0]}, ${blob.color[1]}, ${blob.color[2]}, 0.8)`);
+          gradient.addColorStop(1, `rgba(${blob.color[0]}, ${blob.color[1]}, ${blob.color[2]}, 0)`);
+          
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, w, h);
+        }
+
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    })();
     </script>
   </body>
 </html>

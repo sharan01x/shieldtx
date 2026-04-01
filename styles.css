@@ -1,18 +1,60 @@
+/* ShieldTX Brand Typography - SUSE */
+
+/* ================================
+   Font Face Declarations - Local Fonts
+   ================================ */
+
+/* Using Google Fonts only - no local fonts needed */
+
+/* Google Fonts - SUSE */
+@import url('https://fonts.googleapis.com/css2?family=SUSE:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
-  /* Apple-inspired color palette */
+  /* ShieldTX brand color palette */
   --bg: #ffffff;
   --bgSecondary: #f5f5f7;
   --surface: #ffffff;
   --surfaceElevated: #ffffff;
   --border: #d2d2d7;
   --borderLight: #e5e5e5;
-  --textPrimary: #1d1d1f;
+  
+  /* ShieldTX Brand Colors (from brand book) */
+  --navy: #151F28;
+  --red-signal: #EC3910;
+  --blue-electric: #231EF7;
+  --grey: #E7E9F2;
+  --white: #FFFFFF;
+  
+  /* Theme colors - derived from brand */
+  --textPrimary: #151F28;
   --textSecondary: #6e6e73;
   --textTertiary: #86868b;
   --accent: #0071e3;
   --accentHover: #0077ed;
   --success: #34c759;
   --error: #ff3b30;
+  
+  /* Brand Typography Families */
+  --font-display: "SUSE", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-body: "SUSE", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  
+  /* Brand Typography Scale (from brand book) */
+  --font-xs: 12px;
+  --font-sm: 14px;
+  --font-body-size: 18px;
+  --font-lg: 21px;
+  --font-xl: 24px;
+  --font-h3: 32px;
+  --font-h2: 48px;
+  --font-h1: 64px;
+  --font-display-size: 96px;
+  
+  /* Backward compatibility aliases */
+  --font-md: 18px;
+  --font-2xl: 32px;
+  --font-3xl: 48px;
+  --font-4xl: 64px;
+  --font-5xl: 80px;
   
   /* Spacing scale */
   --space-xs: 4px;
@@ -24,23 +66,12 @@
   --space-3xl: 64px;
   --space-4xl: 96px;
   
-  /* Typography scale */
-  --font-xs: 12px;
-  --font-sm: 14px;
-  --font-md: 16px;
-  --font-lg: 18px;
-  --font-xl: 21px;
-  --font-2xl: 28px;
-  --font-3xl: 40px;
-  --font-4xl: 56px;
-  --font-5xl: 80px;
-  
   /* Layout */
   --container: 1200px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
+  --radius-sm: 5px;
+  --radius-md: 5px;
+  --radius-lg: 5px;
+  --radius-xl: 5px;
   
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
@@ -61,7 +92,7 @@
   --surfaceElevated: #2c2c2e;
   --border: #424245;
   --borderLight: #38383a;
-  --textPrimary: #f5f5f7;
+  --textPrimary: #E7E9F2;
   --textSecondary: #a1a1a6;
   --textTertiary: #6e6e73;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -113,20 +144,129 @@
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--success);
+  color: var(--blue-electric);
   font-weight: 600;
 }
 
-/* Hero glow effect */
+/* ═══════════════════════════════════════════════════════════════
+   ShieldGlow Animated - Organic Color Drift
+   Slow ambient loop using brand colors with canvas-based animation
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Hero glow container */
 .heroGlow {
   position: absolute;
-  inset: -100px -100px auto -100px;
-  height: 400px;
-  background: radial-gradient(closest-side, rgba(0, 113, 227, 0.15), transparent 70%);
-  filter: blur(40px);
+  inset: -100px;
   pointer-events: none;
   z-index: -1;
+  overflow: hidden;
+}
+
+/* Canvas element for organic animation */
+.heroGlow canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(60px);
+  transform: scale(1.2);
   opacity: 0.5;
+}
+
+/* Fallback CSS-only glow for browsers without JS */
+.heroGlowFallback {
+  position: absolute;
+  inset: -100px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.heroGlowFallback::before,
+.heroGlowFallback::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  filter: blur(80px);
+  opacity: 0.4;
+}
+
+.heroGlowFallback::before {
+  background: 
+    radial-gradient(ellipse 60% 40% at 20% 30%, rgba(0, 229, 255, 0.25), transparent),
+    radial-gradient(ellipse 50% 50% at 70% 40%, rgba(35, 30, 247, 0.2), transparent),
+    radial-gradient(ellipse 40% 60% at 40% 70%, rgba(255, 20, 147, 0.15), transparent);
+  animation: shieldGlowOrg1 12s ease-in-out infinite alternate;
+}
+
+.heroGlowFallback::after {
+  background: 
+    radial-gradient(ellipse 70% 30% at 80% 20%, rgba(236, 57, 16, 0.12), transparent),
+    radial-gradient(ellipse 45% 45% at 30% 60%, rgba(0, 102, 255, 0.18), transparent),
+    radial-gradient(ellipse 55% 35% at 60% 80%, rgba(21, 31, 40, 0.15), transparent);
+  animation: shieldGlowOrg2 15s ease-in-out infinite alternate-reverse;
+}
+
+/* Organic drift keyframes - phase 1 */
+@keyframes shieldGlowOrg1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.35;
+  }
+  33% {
+    transform: translate(3%, -2%) scale(1.05);
+    opacity: 0.45;
+  }
+  66% {
+    transform: translate(-2%, 3%) scale(1.02);
+    opacity: 0.38;
+  }
+  100% {
+    transform: translate(1%, 1%) scale(1.08);
+    opacity: 0.42;
+  }
+}
+
+/* Organic drift keyframes - phase 2 */
+@keyframes shieldGlowOrg2 {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(-4%, 2%) scale(1.03) rotate(1deg);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(2%, -3%) scale(1.06) rotate(-0.5deg);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(-1%, -1%) scale(1.04) rotate(0.5deg);
+    opacity: 0.32;
+  }
+  100% {
+    transform: translate(3%, 1%) scale(1.07) rotate(-1deg);
+    opacity: 0.38;
+  }
+}
+
+/* Dark mode glow enhancement */
+.themeDark .heroGlow canvas {
+  opacity: 0.6;
+}
+
+.themeDark .heroGlowFallback::before,
+.themeDark .heroGlowFallback::after {
+  opacity: 0.5;
+}
+
+/* Reduced motion - disable animation for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .heroGlow canvas,
+  .heroGlowFallback::before,
+  .heroGlowFallback::after {
+    animation: none;
+  }
 }
 
 *,
@@ -158,21 +298,22 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--textSecondary);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: var(--font-md);
+  font-family: var(--font-body);
+  font-size: var(--font-body-size);
+  font-weight: 300;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 a {
-  color: var(--accent);
+  color: var(--blue-electric);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: var(--accentHover);
+  color: #1a14e8;
 }
 
 h1,
@@ -183,29 +324,42 @@ h5,
 h6 {
   color: var(--textPrimary);
   margin: 0;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 h1 {
-  font-size: var(--font-5xl);
+  font-size: var(--font-h1);
   line-height: 1.05;
-  font-weight: 700;
+  font-weight: 300;
 }
 
 h2 {
-  font-size: var(--font-4xl);
+  font-size: var(--font-h2);
   line-height: 1.1;
+  font-weight: 300;
 }
 
 h3 {
-  font-size: var(--font-2xl);
-  line-height: 1.2;
+  font-size: var(--font-h3);
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+h4,
+h5,
+h6 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 p {
   margin: 0;
   max-width: 65ch;
+  font-family: var(--font-body);
+  font-weight: 300;
 }
 
 strong {
@@ -214,7 +368,28 @@ strong {
 }
 
 ::selection {
-  background: rgba(0, 113, 227, 0.2);
+  background: rgba(35, 30, 247, 0.2);
+}
+
+/* Brand Typography Utility Classes */
+.display {
+  font-family: var(--font-display);
+  font-size: var(--font-display-size);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.small {
+  font-size: var(--font-sm);
+  line-height: 1.5;
+}
+
+.body-copy {
+  font-family: var(--font-body);
+  font-size: var(--font-body-size);
+  font-weight: 300;
+  line-height: 1.6;
 }
 
 /* Utilities */
@@ -255,7 +430,7 @@ strong {
 .skip:focus {
   transform: translateY(0);
   outline: none;
-  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.3);
+  box-shadow: 0 0 0 4px rgba(35, 30, 247, 0.3);
 }
 
 /* Header */
@@ -292,9 +467,9 @@ strong {
 .brandMark {
   width: 20px;
   height: 20px;
-  border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--accent), #8b5cf6);
-  box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
+  border-radius: 5px;
+  background: linear-gradient(135deg, var(--blue-electric), #00E5FF);
+  box-shadow: 0 2px 8px rgba(35, 30, 247, 0.3);
 }
 
 .brandName {
@@ -344,16 +519,17 @@ strong {
 
 .btn:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.2);
+  box-shadow: 0 0 0 4px rgba(35, 30, 247, 0.2);
 }
 
 .btnPrimary {
-  background: var(--accent);
+  background: var(--blue-electric);
   color: #ffffff;
 }
 
 .btnPrimary:hover {
-  background: var(--accentHover);
+  background: #1a14e8;
+  color: #ffffff;
   transform: scale(1.02);
 }
 
@@ -365,15 +541,16 @@ strong {
 
 .btnSecondary:hover {
   background: var(--borderLight);
+  color: var(--textPrimary);
 }
 
 .btnGhost {
   background: transparent;
-  color: var(--accent);
+  color: var(--blue-electric);
 }
 
 .btnGhost:hover {
-  background: rgba(0, 113, 227, 0.05);
+  background: rgba(35, 30, 247, 0.05);
 }
 
 /* Hero Section */
@@ -402,7 +579,7 @@ strong {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--red-signal);
 }
 
 .lead {
@@ -433,7 +610,7 @@ strong {
   padding: var(--space-xs) var(--space-md);
   font-size: var(--font-xs);
   font-weight: 500;
-  border-radius: 6px;
+  border-radius: 5px;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -970,8 +1147,8 @@ strong {
 
 .ctaForm input:focus {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15);
+  border-color: var(--blue-electric);
+  box-shadow: 0 0 0 4px rgba(35, 30, 247, 0.15);
 }
 
 .fineprint {
@@ -1095,9 +1272,9 @@ strong {
 }
 
 .likeBtn.liked {
-  border-color: var(--accent);
-  background: rgba(0, 113, 227, 0.1);
-  color: var(--accent);
+  border-color: var(--blue-electric);
+  background: rgba(35, 30, 247, 0.1);
+  color: var(--blue-electric);
 }
 
 .likeCount {
@@ -1146,8 +1323,8 @@ strong {
 
 .walletInput:focus {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15);
+  border-color: var(--blue-electric);
+  box-shadow: 0 0 0 4px rgba(35, 30, 247, 0.15);
 }
 
 .scanStatus {
@@ -1168,7 +1345,7 @@ strong {
   width: 20px;
   height: 20px;
   border: 2px solid var(--borderLight);
-  border-top-color: var(--accent);
+  border-top-color: var(--blue-electric);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -1365,9 +1542,18 @@ strong {
 
 @media (max-width: 768px) {
   :root {
+    /* Brand typography responsive scaling */
+    --font-display-size: 64px;
+    --font-h1: 48px;
+    --font-h2: 36px;
+    --font-h3: 28px;
+    --font-body-size: 16px;
+    /* Backward compatibility */
     --font-5xl: 48px;
     --font-4xl: 36px;
     --font-3xl: 28px;
+    --font-2xl: 28px;
+    --font-md: 16px;
   }
   
   .headerInner {
@@ -1426,58 +1612,32 @@ strong {
   }
 }
 
-/* Scroll-based Redaction Effect */
-.redactable {
+/* ═══════════════════════════════════════════════
+   Binary Decode Effect
+   - Text appears as binary characters that decode to real text on hover/scroll
+   ═══════════════════════════════════════════════ */
+.decode-text {
   position: relative;
 }
 
-/* Redaction overlay - thick black bar that covers text */
-.redactable.has-redaction {
-  position: relative;
+.decode-text .decode-char {
+  display: inline;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  white-space: pre-wrap;
 }
 
-.redaction-overlay {
-  position: absolute;
-  left: -6px;
-  top: 50%;
-  height: 85%;
-  width: calc(100% + 12px);
-  background: #000000;
-  transform: translateY(-50%);
-  pointer-events: none;
-  z-index: 100;
-  border-radius: 2px;
-  display: block;
-  content-visibility: visible;
-  transition: width 0.6s ease-out, left 0.6s ease-out;
-  transform-origin: left center;
+/* Binary character styling during decode */
+.decode-binary {
+  color: var(--blue-electric);
+  opacity: 0.8;
 }
 
-.redaction-overlay.revealed {
-  width: 0 !important;
+/* Decode animation when revealed */
+.decode-text.decoded .decode-char {
+  animation: decodeFade 0.08s ease forwards;
 }
 
-/* Light mode uses black, dark mode uses charcoal */
-.themeDark .redaction-overlay {
-  background: rgba(30, 30, 30, 0.98);
-}
-
-/* Ensure headings have thicker overlay */
-h1.redactable .redaction-overlay,
-h2.redactable .redaction-overlay,
-h3.redactable .redaction-overlay {
-  height: 90%;
-  background: #000000;
-}
-
-/* Smaller overlay for smaller text */
-.eyebrow.redactable .redaction-overlay {
-  height: 80%;
-}
-
-/* Dark mode heading overlay stays visible */
-.themeDark h1.redactable .redaction-overlay,
-.themeDark h2.redactable .redaction-overlay,
-.themeDark h3.redactable .redaction-overlay {
-  background: rgba(20, 20, 20, 0.95);
+@keyframes decodeFade {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
 }

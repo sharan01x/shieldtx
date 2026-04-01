@@ -44,13 +44,13 @@
         <section class="hero">
           <div class="container heroGrid">
             <div class="heroCopy">
-              <p class="eyebrow redactable">For traders who hate being copied</p>
-              <h1 class="redactable">
+              <p class="eyebrow decode-text">For traders who hate being copied</p>
+              <h1 class="decode-text">
                 Your trades are public.
                 <br />
                 Your edge shouldn't be.
               </h1>
-              <p class="lead redactable">
+              <p class="lead decode-text">
                 Copy-bots see your fills in under 2 seconds. ShieldTX removes your footprint from public trackers while
                 keeping every trade verifiable on-chain. Same Hyperliquid. Same fills. No audience.
               </p>
@@ -111,16 +111,17 @@
               </div>
             </div>
           </div>
-          <div class="heroGlow" aria-hidden="true"></div>
+          <div class="heroGlow" aria-hidden="true">
+            <canvas id="heroGlowCanvas"></canvas>
+          </div>
         </section>
 
         <section id="exposure" class="section sectionSurface" aria-label="Check your exposure">
           <div class="container">
             <div class="sectionHeader">
-              <p class="eyebrow redactable">> exposure_scan</p>
-              <h2 class="redactable">See who's copying your trades. In real-time.</h2>
-              <p class="lead redactable">
-                Paste your wallet address. We'll show you every correlated wallet, their lag time, and exactly how much
+              <h2 class="decode-text">Copy-paste your address to see who's copy-pasting your trades</h2>
+              <p class="lead decode-text">
+                We'll show you every correlated wallet, their lag time, and exactly how much
                 alpha you're leaking — no connection required.
               </p>
             </div>
@@ -226,8 +227,8 @@
         <section class="section" aria-label="Why ShieldTX">
           <div class="container">
             <div class="sectionHeader">
-              <h2 class="redactable">12+ tools are watching your every move.</h2>
-              <p class="redactable">
+              <h2 class="decode-text">12+ tools are watching your every move.</h2>
+              <p class="decode-text">
                 Dexly, HyperDash, CoinGlass, Nansen, Hyperbot, Arkham — they all broadcast your positions in real-time.
                 ShieldTX turns off the broadcast. You keep trading. They keep guessing.
               </p>
@@ -253,8 +254,8 @@
         <section id="features" class="section sectionSurface">
           <div class="container">
             <div class="sectionHeader">
-              <h2 class="redactable">Privacy built for traders. Not theorists.</h2>
-              <p class="redactable">
+              <h2 class="decode-text">Privacy built for traders. Not theorists.</h2>
+              <p class="decode-text">
                 No seed phrases. No extensions. No latency tax. Just shielded execution that feels exactly like trading
                 on Hyperliquid directly — because it is.
               </p>
@@ -328,8 +329,8 @@
           <div class="container">
             <div class="split">
               <div>
-                <h2 class="redactable">Four steps. Zero footprint.</h2>
-                <p class="redactable">
+                <h2 class="decode-text">Four steps. Zero footprint.</h2>
+                <p class="decode-text">
                   Deposit, trade, close, withdraw. Your funds stay under your control. Your trades stay off public
                   feeds. Your proofs stay verifiable.
                 </p>
@@ -379,8 +380,8 @@
         <section id="comparison" class="section sectionSurface">
           <div class="container">
             <div class="sectionHeader">
-              <h2 class="redactable">Compare ShieldTX to the alternatives.</h2>
-              <p class="redactable">
+              <h2 class="decode-text">Compare ShieldTX to the alternatives.</h2>
+              <p class="decode-text">
                 Most privacy tools force a trade-off: privacy or performance. ShieldTX delivers both. Here's how it
                 stacks up against trading direct, using mixers, or copy platforms.
               </p>
@@ -467,8 +468,8 @@
         <section id="pricing" class="section sectionSurface">
           <div class="container">
             <div class="sectionHeader">
-              <h2 class="redactable">Copy-bots cost you 5-15 bps per trade. ShieldTX costs less.</h2>
-              <p class="redactable">All tiers free during private beta.</p>
+              <h2 class="decode-text">Copy-bots cost you 5-15 bps per trade. ShieldTX costs less.</h2>
+              <p class="decode-text">All tiers free during private beta.</p>
             </div>
 
             <div class="pricingGrid">
@@ -527,8 +528,8 @@
           <div class="container">
             <div class="callout">
               <div>
-                <h2 class="redactable">Privacy without the sketchy reputation.</h2>
-                <p class="redactable">
+                <h2 class="decode-text">Privacy without the sketchy reputation.</h2>
+                <p class="decode-text">
                   ShieldTX isn't a mixer. It's compliance-ready infrastructure for traders who want privacy without
                   becoming a red flag.
                 </p>
@@ -547,8 +548,8 @@
           <div class="container">
             <div class="cta">
               <div>
-                <h2 class="redactable">See your leakage. Then fix it.</h2>
-                <p class="redactable">
+                <h2 class="decode-text">See your leakage. Then fix it.</h2>
+                <p class="decode-text">
                   We'll scan your wallet, show you exactly who's copying your trades, and walk you through how ShieldTX
                   blocks their signal. 30 minutes. No pitch deck.
                 </p>
@@ -580,8 +581,8 @@
         <section id="faq" class="section">
           <div class="container">
             <div class="sectionHeader">
-              <h2 class="redactable">Questions. Answered.</h2>
-              <p class="redactable">Everything you need to know before getting started.</p>
+              <h2 class="decode-text">Questions. Answered.</h2>
+              <p class="decode-text">Everything you need to know before getting started.</p>
             </div>
 
             <div class="faq">
@@ -648,8 +649,8 @@
           <div class="container">
             <div class="callout">
               <div>
-                <h2 class="redactable">You decide what we build next.</h2>
-                <p class="redactable">
+                <h2 class="decode-text">You decide what we build next.</h2>
+                <p class="decode-text">
                   Roadmap votes aren't vanity metrics — they're our build queue. See what's trending and vote on the
                   features that matter most to your trading.
                 </p>
@@ -793,74 +794,171 @@
         scanBtn.disabled = false;
       });
 
-      // Scroll-based Redaction Effect (inverted: starts redacted, reveals on scroll)
-      const redactableElements = document.querySelectorAll('.redactable');
+      // Scan scanner logic complete
+
+    // ═══════════════════════════════════════════════
+    // Visual Cipher Decode Effect
+    // - Text appears as scrambled cipher characters that decode to real text
+    // - Triggers on hover or scroll into view
+    // ═══════════════════════════════════════════════
+    
+    // Visual cipher character set (hex + symbols for scrambeled look)
+    const CIPHER_CHARS = '0123456789ABCDEF#@%&?!';
+    
+    // Generate random cipher string (1:1 mapping with original length)
+    function codedString(length) {
+      let s = '';
+      for (let i = 0; i < length; i++) {
+        s += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
+      }
+      return s;
+    }
+    
+    // Get random cipher character
+    function randomCipherChar() {
+      return CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
+    }
+    
+    // Decode text animation - character-by-character reveal
+    function decodeText(element, targetText) {
+      const chars = targetText.split('');
+      let iteration = 0;
+      const maxIterations = chars.length;
       
-      // Create redaction overlay spans for each element
-      redactableElements.forEach(el => {
-        // Create overlay element
-        const overlay = document.createElement('span');
-        overlay.className = 'redaction-overlay';
+      const interval = setInterval(() => {
+        element.textContent = chars.map((char, i) => {
+          if (char === '\n') return '\n';
+          if (i < iteration) return char;
+          return randomCipherChar();
+        }).join('');
         
-        // Add random width variation for authentic "hand-applied" redaction look
-        const rect = el.getBoundingClientRect();
-        const variation = 0.85 + Math.random() * 0.35; // 0.85 to 1.2 (±10-20%)
-        const baseWidth = rect.width + 12; // 12px padding from CSS (left: -6px)
-        overlay.style.width = `${baseWidth * variation}px`;
+        iteration += 3;
         
-        el.appendChild(overlay);
-        el.classList.add('has-redaction');
-        
-        // Store reference to overlay on the element
-        el._redactionOverlay = overlay;
-        
-        // Add hover trigger - reveals immediately on mouseover
-        el.addEventListener('mouseover', () => {
-          revealElement(el);
-        });
-      });
-      
-      // Reveal element by adding revealed class and cleanup
-      function revealElement(el) {
-        const overlay = el._redactionOverlay;
-        if (overlay && !overlay.classList.contains('revealed')) {
-          overlay.classList.add('revealed');
-          // Remove after animation completes
-          setTimeout(() => {
-            overlay.remove();
-            el.classList.remove('has-redaction');
-          }, 600);
+        if (iteration > maxIterations) {
+          clearInterval(interval);
+          const stored = decodedTexts.get(element);
+          if (stored && stored.html) {
+            element.innerHTML = stored.html;
+          } else {
+            element.textContent = targetText;
+          }
+          element.style.whiteSpace = '';
+          element.classList.add('decoded');
         }
+      }, 25);
+    }
+    
+    // Initialize visual cipher decode elements — headings only
+    const decodeElements = document.querySelectorAll('h1, h2, h3');
+    const decodedTexts = new WeakMap();
+    
+    decodeElements.forEach(el => {
+      const originalHTML = el.innerHTML;
+      const originalText = el.innerText;
+      decodedTexts.set(el, { html: originalHTML, text: originalText });
+      
+      // 1:1 cipher mapping — preserve line breaks
+      el.textContent = originalText.split('').map(ch =>
+        ch === '\n' ? '\n' : randomCipherChar()
+      ).join('');
+      el.style.whiteSpace = 'pre-line';
+      
+      // Decode on hover
+      el.addEventListener('mouseenter', () => {
+        if (!el.classList.contains('decoded')) {
+          decodeText(el, originalText);
+        }
+      });
+    });
+    
+    // Intersection Observer for scroll-triggered decode
+    let decodeDelayComplete = false;
+    setTimeout(() => { decodeDelayComplete = true; }, 1000);
+    
+    const decodeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && decodeDelayComplete) {
+          const el = entry.target;
+          const stored = decodedTexts.get(el);
+          if (!el.classList.contains('decoded') && stored) {
+            decodeText(el, stored.text);
+          }
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '-20px 0px' });
+    
+    decodeElements.forEach(el => decodeObserver.observe(el));
+
+    // ═══════════════════════════════════════════════════════════════
+    // ShieldGlow Animated - Organic Color Drift Canvas Animation
+    // From brand book: slow ambient loop using brand colors
+    // ═══════════════════════════════════════════════════════════════
+    (function initShieldGlow() {
+      const canvas = document.getElementById('heroGlowCanvas');
+      if (!canvas) return;
+      
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      // Brand colors from brandbook (normalized for rgba)
+      // Navy #151F28, Red Signal #EC3910, Blue Electric #231EF7
+      // Cyan #00E5FF, Pink #FF1493
+      const blobs = [
+        { homeX: 0.15, homeY: 0.15, x: 0.15, y: 0.15, radius: 0.5, color: [21, 31, 40], freq: 0.0006 },   // Navy
+        { homeX: 0.25, homeY: 0.45, x: 0.25, y: 0.45, radius: 0.45, color: [236, 57, 16], freq: 0.001 },  // Red Signal
+        { homeX: 0.55, homeY: 0.30, x: 0.55, y: 0.30, radius: 0.40, color: [35, 30, 247], freq: 0.0007 }, // Blue Electric
+        { homeX: 0.70, homeY: 0.20, x: 0.70, y: 0.20, radius: 0.35, color: [0, 229, 255], freq: 0.0009 }, // Cyan
+        { homeX: 0.80, homeY: 0.70, x: 0.80, y: 0.70, radius: 0.40, color: [255, 20, 147], freq: 0.0008 },// Pink
+      ];
+
+      // Resize canvas to match container
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
       }
       
-      // Track if we've already started revealing elements
-      let initialDelayComplete = false;
+      // Initial resize and on window resize
+      resize();
+      window.addEventListener('resize', resize);
       
-      // Delay before elements start revealing via scroll
-      setTimeout(() => {
-        initialDelayComplete = true;
-      }, 1500); // 1.5 second delay before any un-redaction starts
-      
-      const observerCallback = (entries) => {
-        entries.forEach(entry => {
-          // Reveal when element enters viewport (only after initial delay)
-          if (entry.isIntersecting && initialDelayComplete) {
-            revealElement(entry.target);
-          }
-        });
-      };
+      // Also resize after a short delay to ensure container is fully rendered
+      setTimeout(resize, 100);
 
-      const observerOptions = {
-        root: null,
-        rootMargin: '-20px 0px',
-        threshold: 0.2
-      };
+      // Animation loop - organic color drift
+      function animate(time) {
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
 
-      const redactionObserver = new IntersectionObserver(observerCallback, observerOptions);
-      
-      redactableElements.forEach(el => {
-        redactionObserver.observe(el);
-      });
+        for (const blob of blobs) {
+          // Organic movement using sine waves at different frequencies
+          const targetX = blob.homeX + Math.sin(time * blob.freq) * 0.12;
+          const targetY = blob.homeY + Math.cos(time * blob.freq * 1.3) * 0.12;
+          
+          // Smooth easing toward target
+          blob.x += (targetX - blob.x) * 0.02;
+          blob.y += (targetY - blob.y) * 0.02;
+
+          const radius = blob.radius * Math.min(w, h);
+          
+          // Create radial gradient
+          const gradient = ctx.createRadialGradient(
+            blob.x * w, blob.y * h, 0,
+            blob.x * w, blob.y * h, radius
+          );
+          
+          gradient.addColorStop(0, `rgba(${blob.color[0]}, ${blob.color[1]}, ${blob.color[2]}, 0.8)`);
+          gradient.addColorStop(1, `rgba(${blob.color[0]}, ${blob.color[1]}, ${blob.color[2]}, 0)`);
+          
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, w, h);
+        }
+
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    })();
     </script>
   </body>
 </html>
