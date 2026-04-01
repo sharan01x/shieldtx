@@ -19,9 +19,9 @@
       <header class="header">
         <div class="container headerInner">
           <div class="brand" aria-label="ShieldTX">
-            <span class="brandMark" aria-hidden="true"></span>
-            <span class="brandName">ShieldTX</span>
-            <span class="brandTag">Roadmap</span>
+            <a href="index.html">
+              <img src="logoOption3.svg" alt="ShieldTX" class="brandLogo" />
+            </a>
           </div>
 
           <nav class="nav" aria-label="Primary">
@@ -281,67 +281,59 @@
     // - Text appears as scrambled cipher characters that decode to real text
     // - Triggers on hover or scroll into view
     // ═══════════════════════════════════════════════
-    
-    // Visual cipher character set (hex + symbols for scrambeled look)
+
+    // Visual cipher character set (hex + symbols for scrambled look)
     const CIPHER_CHARS = '0123456789ABCDEF#@%&?!';
-    
-    // Generate random cipher string (1:1 mapping with original length)
-    function codedString(length) {
-      let s = '';
-      for (let i = 0; i < length; i++) {
-        s += CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
-      }
-      return s;
-    }
-    
+
     // Get random cipher character
     function randomCipherChar() {
       return CIPHER_CHARS[Math.floor(Math.random() * CIPHER_CHARS.length)];
     }
-    
+
     // Decode text animation - character-by-character reveal
     function decodeText(element, targetText) {
       const chars = targetText.split('');
       let iteration = 0;
       const maxIterations = chars.length;
-      
+
       const interval = setInterval(() => {
         element.textContent = chars.map((char, i) => {
+          if (char === '\n' || char === ' ') return char;
           if (i < iteration) return char;
           return randomCipherChar();
         }).join('');
-        
-        iteration++;
-        
-      if (iteration > maxIterations) {
-        clearInterval(interval);
-        // Restore original HTML structure (preserves <br /> and formatting)
-        const stored = decodedTexts.get(element);
-        if (stored && stored.html) {
-          element.innerHTML = stored.html;
-        } else {
-          element.textContent = targetText;
+
+        iteration += 3;
+
+        if (iteration > maxIterations) {
+          clearInterval(interval);
+          const stored = decodedTexts.get(element);
+          if (stored && stored.html) {
+            element.innerHTML = stored.html;
+          } else {
+            element.textContent = targetText;
+          }
+          element.style.whiteSpace = '';
+          element.classList.add('decoded');
         }
-        element.classList.add('decoded');
-      }
-      }, 40);
+      }, 25);
     }
-    
-    // Initialize visual cipher decode elements
-    const decodeElements = document.querySelectorAll('.decode-text');
+
+    // Initialize visual cipher decode elements — h1 only
+    const decodeElements = document.querySelectorAll('h1');
     const decodedTexts = new WeakMap();
-    
+
     decodeElements.forEach(el => {
-      // Store original HTML structure, preserving <br /> and whitespace
       const originalHTML = el.innerHTML;
-      // Also store plain text for 1:1 cipher character mapping
-      const originalText = el.textContent;
+      const originalText = el.innerText;
       decodedTexts.set(el, { html: originalHTML, text: originalText });
-      
-      // Start with cipher string matching the text length (1:1 mapping)
-      el.textContent = codedString(originalText.length);
-      el.style.whiteSpace = 'pre-wrap';
-      
+
+      // 1:1 cipher mapping — preserve spaces and line breaks
+      el.textContent = originalText.split('').map(ch =>
+        (ch === '\n' || ch === ' ') ? ch : randomCipherChar()
+      ).join('');
+      el.style.whiteSpace = 'pre-line';
+
       // Decode on hover
       el.addEventListener('mouseenter', () => {
         if (!el.classList.contains('decoded')) {
@@ -349,11 +341,11 @@
         }
       });
     });
-    
+
     // Intersection Observer for scroll-triggered decode
     let decodeDelayComplete = false;
     setTimeout(() => { decodeDelayComplete = true; }, 1000);
-    
+
     const decodeObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && decodeDelayComplete) {
@@ -365,7 +357,7 @@
         }
       });
     }, { threshold: 0.3, rootMargin: '-20px 0px' });
-    
+
     decodeElements.forEach(el => decodeObserver.observe(el));
     </script>
   </body>

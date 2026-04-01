@@ -479,6 +479,12 @@ strong {
   letter-spacing: -0.01em;
 }
 
+.brandLogo {
+  height: 60px;
+  width: auto;
+  vertical-align: middle;
+}
+
 .nav {
   display: flex;
   gap: var(--space-2xl);
