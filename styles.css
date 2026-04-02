@@ -565,7 +565,7 @@ footer {
 .nav a {
   color: var(--textSecondary);
   font-size: var(--font-sm);
-  font-weight: 500;
+  font-weight: 600;
   transition: color 0.2s ease;
 }
 
@@ -670,6 +670,29 @@ footer {
 
 .heroCopy h1 {
   margin: var(--space-lg) 0 var(--space-md);
+}
+.heroCopy h1::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--blue-electric);
+  border-radius: 2px;
+  margin: var(--space-md) 0 var(--space-md);
+}
+
+/* Blue accent line between section headline and body copy */
+.sectionHeader h2 {
+  margin-bottom: var(--space-sm);
+}
+.sectionHeader h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--blue-electric);
+  border-radius: 2px;
+  margin: var(--space-md) 0 var(--space-md);
 }
 
 .eyebrow {
