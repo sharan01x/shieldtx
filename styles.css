@@ -257,6 +257,53 @@
   }
 }
 
+/* Fractal glass overlay — full page striated glass effect */
+.fractal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0.5;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fractal-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  background: rgba(0, 89, 223, 0.06);
+}
+
+.fractal-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,0.14) 0px,
+      rgba(255,255,255,0.14) 1px,
+      transparent 1px,
+      transparent 4px,
+      rgba(4,9,20,0.10) 4px,
+      rgba(4,9,20,0.10) 8px,
+      transparent 8px,
+      transparent 12px
+    ),
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,0.06) 0px,
+      transparent 2px,
+      transparent 14px
+    ),
+    linear-gradient(180deg,
+      rgba(255,255,255,0.10) 0%,
+      rgba(4,9,20,0.08) 30%,
+      rgba(255,255,255,0.06) 60%,
+      rgba(4,9,20,0.05) 100%);
+  background-blend-mode: overlay;
+  box-shadow: -2.23px -2.23px 1.11px rgba(255,255,255,0.20) inset;
+}
+
 /* Dark mode glow enhancement */
 .themeDark .heroGlow canvas {
   opacity: 0.6;
@@ -784,6 +831,9 @@ footer {
 /* Sections */
 .section {
   padding: var(--space-4xl) 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  margin: 0 var(--space-xl) var(--space-xl);
 }
 
 .sectionSurface {
@@ -791,6 +841,7 @@ footer {
   border-radius: var(--radius-xl);
   margin: 0 var(--space-xl) var(--space-xl);
   padding: var(--space-4xl) 0;
+  border: 1px solid var(--border);
 }
 
 .sectionHeader {
@@ -808,6 +859,35 @@ footer {
   font-size: var(--font-lg);
   color: var(--textSecondary);
   line-height: 1.7;
+}
+
+/* Blue accent line between heading and body copy */
+.sectionHeader h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--blue-electric);
+  border-radius: 2px;
+  margin: var(--space-md) auto 0;
+}
+
+/* Readability for text on sections without a container background (fractal overlay shows through) */
+.textPlainSection {
+  border: none;
+  color: var(--textPrimary);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.textPlainSection h2,
+.textPlainSection h3 {
+  color: var(--textPrimary);
+}
+
+.textPlainSection p,
+.textPlainSection .lead {
+  color: var(--textPrimary);
+  opacity: 0.85;
 }
 
 /* Stats */
@@ -930,6 +1010,7 @@ footer {
   place-items: center;
   font-weight: 700;
   font-size: var(--font-md);
+  font-family: var(--font-mono);
 }
 
 .stepT {

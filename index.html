@@ -7,6 +7,9 @@
   <title>ShieldTX — Private, Verifiable Crypto Transactions</title>
   <meta name="description"
     content="ShieldTX enables private crypto transactions and privacy-first trading while remaining recorded and verifiable on-chain. Protect your strategy from copy traders." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=SUSE:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -49,6 +52,8 @@
     <div class="heroGlow" aria-hidden="true">
       <canvas id="heroGlowCanvas"></canvas>
     </div>
+
+    <div class="fractal-overlay" aria-hidden="true"></div>
 
     <main id="main">
       <section class="hero">
@@ -227,7 +232,7 @@
         </div>
       </section>
 
-      <section class="section" aria-label="Why ShieldTX">
+      <section class="section textPlainSection" aria-label="Why ShieldTX">
         <div class="container">
           <div class="sectionHeader">
             <h2 class="decode-text">Every breath you take, every move you make</h2>
@@ -329,7 +334,7 @@
         </div>
       </section>
 
-      <section class="section">
+      <section class="section textPlainSection">
         <div class="container">
           <div class="split">
             <div>
@@ -491,7 +496,7 @@
         </div>
       </section>
 
-      <section class="section">
+      <section class="section textPlainSection">
         <div class="container">
           <div class="callout">
             <div>
@@ -507,33 +512,6 @@
               <li>Optional verification for higher limits</li>
               <li>Viewing keys for audits &amp; reporting</li>
             </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="early-access" class="section">
-        <div class="container">
-          <div class="cta">
-            <div>
-              <h2 class="decode-text">Seeing is believing</h2>
-              <p class="decode-text">
-                We'll scan your wallet, show you exactly who's copying your trades, and walk you through how ShieldTX
-                blocks their signal. 30 minutes. No pitch deck.
-              </p>
-            </div>
-            <form class="ctaForm" onsubmit="event.preventDefault()">
-              <label class="srOnly" for="email">
-                Email address
-              </label>
-              <input id="email" name="email" type="email" autocomplete="email" inputmode="email"
-                placeholder="you@domain.com" required />
-              <button class="btn btnPrimary" type="submit">
-                Request demo
-              </button>
-            </form>
-            <p class="fineprint">
-              No spam. One email to schedule. (Hook this form to your backend later.)
-            </p>
           </div>
         </div>
       </section>
@@ -605,7 +583,34 @@
         </div>
       </section>
 
-      <section class="section sectionAlt" aria-label="Roadmap participation">
+      <section id="early-access" class="section textPlainSection">
+        <div class="container">
+          <div class="cta">
+            <div>
+              <h2 class="decode-text">Seeing is believing</h2>
+              <p class="decode-text">
+                We'll scan your wallet, show you exactly who's copying your trades, and walk you through how ShieldTX
+                blocks their signal. 30 minutes. No pitch deck.
+              </p>
+            </div>
+            <form class="ctaForm" onsubmit="event.preventDefault()">
+              <label class="srOnly" for="email">
+                Email address
+              </label>
+              <input id="email" name="email" type="email" autocomplete="email" inputmode="email"
+                placeholder="you@domain.com" required />
+              <button class="btn btnPrimary" type="submit">
+                Request demo
+              </button>
+            </form>
+            <p class="fineprint">
+              No spam. One email to schedule. (Hook this form to your backend later.)
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section sectionAlt textPlainSection themeDark" aria-label="Roadmap participation">
         <div class="container">
           <div class="callout">
             <div>
