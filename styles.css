@@ -120,8 +120,24 @@
 }
 
 .callout p {
-  color: var(--textSecondary);
+  color: var(--textPrimary);
+  opacity: 0.85;
   line-height: 1.7;
+}
+
+/* Section breaker variant — no background, no border, text floats over the fractal overlay */
+.callout.breaker {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.callout.breaker h2 {
+  color: var(--textPrimary);
+}
+
+.callout.breaker p {
+  color: var(--textSecondary);
 }
 
 .checklist {
@@ -665,7 +681,7 @@ footer {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: var(--space-3xl);
-  align-items: center;
+  align-items: start;
 }
 
 .heroCopy h1 {
@@ -754,14 +770,24 @@ footer {
 }
 
 /* Hero Card */
+/* Hero Interface Image */
 .heroCard {
   position: relative;
-  border: 1px solid var(--borderLight);
-  background: var(--surface);
+  border: none;
+  background: transparent;
   border-radius: var(--radius-xl);
-  padding: var(--space-xl);
-  box-shadow: var(--shadow-lg);
+  padding: 0;
+  box-shadow: none;
+  overflow: hidden;
+  align-self: end;
+  height: 100%;
+  background-image: url('interface.png');
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  min-height: 100%;
 }
+
 
 .heroCardTop {
   display: flex;
@@ -992,6 +1018,74 @@ footer {
 }
 
 /* Split Layout */
+.splitNarrow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-xl);
+  align-items: start;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.splitNarrow .sectionHeader {
+  text-align: left;
+  max-width: none;
+}
+
+.splitNarrow .sectionHeader h2::after {
+  display: none;
+}
+
+.textPlainSection .sectionHeader h2::after {
+  display: none;
+}
+
+#early-access.section {
+  padding: var(--space-xl) 0;
+}
+
+.splitNarrow .checklist {
+  margin: 0;
+  padding: 0;
+}
+
+.splitNarrow .checklist li {
+  font-size: var(--font-md);
+}
+
+/* Compliance cards - visible cards for shielded execution section */
+.complianceCards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.complianceCard {
+  border: 1px solid var(--borderLight);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-xl);
+  font-size: var(--font-md);
+  font-weight: 500;
+  color: var(--textPrimary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Check marks for compliance step items (no step number, just checkmark) */
+.steps .step:has(.stepT:not(:has(~ .stepD))) .stepT::before {
+  content: '✓';
+  margin-right: var(--space-sm);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .splitNarrow {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: var(--space-lg);
+  }
+}
 .split {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
@@ -1016,11 +1110,29 @@ footer {
   display: grid;
   grid-template-columns: 40px 1fr;
   gap: var(--space-md);
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Step cards without a number badge (e.g. Shielded execution section) */
+.step:not(:has(.stepN)) {
+  grid-template-columns: 1fr;
 }
 
 .step:hover {
   box-shadow: var(--shadow-md);
+}
+
+/* Stagger: each step waits before transitioning */
+.step:nth-child(1) { transition-delay: 0.1s; }
+.step:nth-child(2) { transition-delay: 0.25s; }
+.step:nth-child(3) { transition-delay: 0.4s; }
+.step:nth-child(4) { transition-delay: 0.55s; }
+
+.step.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .stepN {
@@ -1269,16 +1381,17 @@ footer {
   color: rgba(231, 233, 242, 0.7);
 }
 .cta {
-  background: var(--surface);
-  border-radius: var(--radius-xl);
-  padding: var(--space-3xl);
+  border: none;
+  background: transparent;
+  padding: var(--space-2xl);
   text-align: center;
   max-width: 700px;
   margin: 0 auto;
 }
 
-.cta h2 {
-  margin-bottom: var(--space-md);
+#early-access.section {
+  padding: 0;
+  margin: 0 var(--space-xl) var(--space-xl);
 }
 
 .ctaForm {
