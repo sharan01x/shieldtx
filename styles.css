@@ -1148,6 +1148,19 @@ footer {
   font-family: var(--font-mono);
 }
 
+/* Checkmark icon for shield-steps (Not a Mixer section) */
+.stepCheck {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: rgba(0, 229, 255, 0.1);
+  color: #00E5FF;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: var(--font-lg);
+}
+
 .stepT {
   font-weight: 600;
   color: var(--textPrimary);
