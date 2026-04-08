@@ -15,6 +15,7 @@
 
 <body>
   <div class="page">
+    <div class="boundary-container">
     <a class="skip" href="#main">
       Skip to content
     </a>
@@ -84,7 +85,32 @@
             </div>
           </div>
 
-          <div class="heroCard" aria-label="Product preview"></div>
+          <div class="heroCard" aria-label="Product preview">
+            <div class="device">
+              <div class="device-notch"></div>
+              <div class="device-screen">
+                <div class="dscreen-top">
+                  <span class="mono">EXPOSURE.SCAN</span>
+                  <span class="mono dim">0.84s</span>
+                </div>
+                <div class="dscreen-headline">4 wallets<br />copying you.</div>
+                <div class="dscreen-rows">
+                  <div class="dscreen-row">
+                    <span>Avg lag</span><span class="mono">4.8s</span>
+                  </div>
+                  <div class="dscreen-row">
+                    <span>Window</span><span class="mono">last 30d</span>
+                  </div>
+                  <div class="dscreen-row hot">
+                    <span>Est. leakage</span><span class="mono">~6 bps</span>
+                  </div>
+                </div>
+                <div class="dscreen-cta">
+                  <span>Shield these positions</span><span>→</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -101,7 +127,7 @@
             <div class="exposureForm">
               <input type="text" id="walletInput" class="walletInput" placeholder="Enter your wallet address." pattern="^0x[a-fA-F0-9]{40}$"
                 spellcheck="false" autocomplete="off" />
-              <button id="scanBtn" class="btn btnPrimary" disabled>
+              <button id="scanBtn" class="btn btnLight" disabled>
                 Scan
               </button>
             </div>
@@ -109,6 +135,36 @@
             <div id="scanStatus" class="scanStatus hidden">
               <span class="scanSpinner"></span>
               <span id="scanStatusText">Analyzing fill patterns...</span>
+            </div>
+          </div>
+
+          <div class="dashframe">
+            <div class="dashbar">
+              <span class="ddot"></span><span class="ddot"></span><span class="ddot"></span>
+              <span class="mono dim">app.shieldtx.io / terminal</span>
+              <span class="dpill mono">SHIELDED</span>
+            </div>
+            <div class="dashbody">
+              <aside class="dashside">
+                <div class="dlabel mono">MARKETS</div>
+                <div class="drow active"><span>ETH-PERP</span><span class="mono accent">+1.24%</span></div>
+                <div class="drow"><span>BTC-PERP</span><span class="mono">−0.42%</span></div>
+                <div class="drow"><span>SOL-PERP</span><span class="mono accent">+0.81%</span></div>
+                <div class="drow"><span>HYPE-PERP</span><span class="mono accent">+3.06%</span></div>
+              </aside>
+              <main class="dashmain">
+                <div class="dchart">
+                  <div class="dchart-grid"></div>
+                  <svg viewBox="0 0 400 160" preserveAspectRatio="none" class="dchart-line">
+                    <polyline points="0,120 30,108 60,116 90,90 120,98 150,72 180,86 210,60 240,68 270,42 300,54 330,28 360,40 400,18" />
+                  </svg>
+                </div>
+                <div class="dpanels">
+                  <div class="dpanel"><span class="mono dim">PNL</span><span class="mono accent">+12.4%</span></div>
+                  <div class="dpanel"><span class="mono dim">SIZE</span><span class="mono mask">▮▮▮ ETH</span></div>
+                  <div class="dpanel"><span class="mono dim">FOOTPRINT</span><span class="mono ok">NONE</span></div>
+                </div>
+              </main>
             </div>
           </div>
 
@@ -226,34 +282,110 @@
           </div>
 
           <div class="featureGrid">
-            <article class="card">
-              <h3>Execution shielding</h3>
-              <p>Your entries, sizing, and liquidation levels stay off the radar.</p>
+            <article class="fcard">
+              <div class="fhead">
+                <div class="ficon">◇</div>
+                <h3>Execution shielding</h3>
+              </div>
+              <ul>
+                <li>Entries, sizing, and liquidation levels stay off the radar</li>
+                <li>Nothing on-chain links your trades to you</li>
+              </ul>
+              <div class="fvisual fv-shield" aria-hidden="true">
+                <div class="fv-row"><span class="mono dim">SIZE</span><span class="mono mask">▮▮▮▮.▮▮</span></div>
+                <div class="fv-row"><span class="mono dim">ENTRY</span><span class="mono mask">▮▮▮▮.▮▮</span></div>
+                <div class="fv-row"><span class="mono dim">LIQ</span><span class="mono mask">▮▮▮▮.▮▮</span></div>
+                <div class="fv-pulse"></div>
+              </div>
             </article>
 
-            <article class="card">
-              <h3>Hyperliquid fill parity</h3>
-              <p>Executes at native HL speed.</p>
+            <article class="fcard">
+              <div class="fhead">
+                <div class="ficon">↗</div>
+                <h3>Hyperliquid fill parity</h3>
+              </div>
+              <ul>
+                <li>Executes at native HL speed</li>
+                <li>Same order book, same liquidity</li>
+              </ul>
+              <div class="fvisual fv-book" aria-hidden="true">
+                <div class="bookbar b-bid" style="width:82%"></div>
+                <div class="bookbar b-bid" style="width:64%"></div>
+                <div class="bookbar b-bid" style="width:48%"></div>
+                <div class="bookbar b-mid"></div>
+                <div class="bookbar b-ask" style="width:55%"></div>
+                <div class="bookbar b-ask" style="width:71%"></div>
+                <div class="bookbar b-ask" style="width:88%"></div>
+              </div>
             </article>
 
-            <article class="card">
-              <h3>Copy-bot resistant by design</h3>
-              <p>Break the signal copy bots rely on.</p>
+            <article class="fcard">
+              <div class="fhead">
+                <div class="ficon">⊘</div>
+                <h3>Copy-bot resistant by design</h3>
+              </div>
+              <ul>
+                <li>Break the signal copy bots rely on</li>
+                <li>No mirrored entries, no crowded exits</li>
+              </ul>
+              <div class="fvisual fv-bot" aria-hidden="true">
+                <div class="botdot d1"></div>
+                <div class="botdot d2"></div>
+                <div class="botdot d3"></div>
+                <div class="botblock">BLOCKED</div>
+              </div>
             </article>
 
-            <article class="card">
-              <h3>No wallet confusion</h3>
-              <p>No extensions, no seed phrases.</p>
+            <article class="fcard">
+              <div class="fhead">
+                <div class="ficon">⬡</div>
+                <h3>No wallet confusion</h3>
+              </div>
+              <ul>
+                <li>No extensions, no seed phrases</li>
+                <li>Sign in with Google, Apple, or email</li>
+              </ul>
+              <div class="fvisual fv-login" aria-hidden="true">
+                <div class="lbtn">G  Continue with Google</div>
+                <div class="lbtn">  Continue with Apple</div>
+                <div class="lbtn">@  Continue with Email</div>
+              </div>
             </article>
 
-            <article class="card">
-              <h3>You control your funds</h3>
-              <p>Non-custodial vault. Permissionless withdrawals.</p>
+            <article class="fcard">
+              <div class="fhead">
+                <div class="ficon">▲</div>
+                <h3>You control your funds</h3>
+              </div>
+              <ul>
+                <li>Non-custodial vault on Arbitrum</li>
+                <li>Permissionless withdrawals</li>
+              </ul>
+              <div class="fvisual fv-vault" aria-hidden="true">
+                <div class="vchain">USDC</div>
+                <div class="varrow">→</div>
+                <div class="vchain vlocked">◇ note</div>
+                <div class="varrow">→</div>
+                <div class="vchain vlocked">◇ note</div>
+              </div>
             </article>
 
-            <article class="card">
-              <h3>One account</h3>
-              <p>The clean replacement for multi-wallet rotation.</p>
+            <article class="fcard">
+              <div class="fhead">
+                <div class="ficon">⇄</div>
+                <h3>One account</h3>
+              </div>
+              <ul>
+                <li>The clean replacement for multi-wallet rotation</li>
+                <li>No clustering exposure</li>
+              </ul>
+              <div class="fvisual fv-xfer" aria-hidden="true">
+                <div class="xnode">A</div>
+                <div class="xline"></div>
+                <div class="xnode">B</div>
+                <div class="xline"></div>
+                <div class="xnode">C</div>
+              </div>
             </article>
           </div>
         </div>
@@ -261,50 +393,52 @@
 
       <section class="section textPlainSection">
         <div class="container">
-          <div class="split">
-            <div>
-              <h2 class="decode-text">Four steps. Zero footprint.</h2>
-              <p class="decode-text">
-              </p>
-            </div>
-            <ol class="steps">
-              <li class="step">
-                <div class="stepN">1</div>
-                <div class="stepBody">
-                  <div class="stepT">Deposit</div>
-                  <div class="stepD">
-                    Your funds are deposited into a vault contract on Arbitrum.
-                  </div>
-                </div>
-              </li>
-              <li class="step">
-                <div class="stepN">2</div>
-                <div class="stepBody">
-                  <div class="stepT">Trade</div>
-                  <div class="stepD">
-                    You place trades from a fresh, unlinkable wallet on Hyperliquid.
-                  </div>
-                </div>
-              </li>
-              <li class="step">
-                <div class="stepN">3</div>
-                <div class="stepBody">
-                  <div class="stepT">Close</div>
-                  <div class="stepD">
-                    You can keep trading or re-shield for maximum unlinkability.
-                  </div>
-                </div>
-              </li>
-              <li class="step">
-                <div class="stepN">4</div>
-                <div class="stepBody">
-                  <div class="stepT">Withdraw</div>
-                  <div class="stepD">
-                    Withdrawals are permissionless and trustless.
-                  </div>
-                </div>
-              </li>
-            </ol>
+          <div class="sectionHeader">
+            <h2 class="decode-text">Four steps. Zero footprint.</h2>
+            <p class="decode-text">
+            </p>
+          </div>
+          <div class="stepsGrid">
+            <article class="stepCard">
+              <div class="stepVisual stepVisual-1">
+                <div class="stepIcon">🔒</div>
+              </div>
+              <div class="stepN">Step 1</div>
+              <div class="stepT">Deposit</div>
+              <div class="stepD">
+                Your funds are deposited into a vault contract on Arbitrum.
+              </div>
+            </article>
+            <article class="stepCard">
+              <div class="stepVisual stepVisual-2">
+                <div class="stepIcon">↗</div>
+              </div>
+              <div class="stepN">Step 2</div>
+              <div class="stepT">Trade</div>
+              <div class="stepD">
+                You place trades from a fresh, unlinkable wallet on Hyperliquid.
+              </div>
+            </article>
+            <article class="stepCard">
+              <div class="stepVisual stepVisual-3">
+                <div class="stepIcon">⊘</div>
+              </div>
+              <div class="stepN">Step 3</div>
+              <div class="stepT">Close</div>
+              <div class="stepD">
+                You can keep trading or re-shield for maximum unlinkability.
+              </div>
+            </article>
+            <article class="stepCard">
+              <div class="stepVisual stepVisual-4">
+                <div class="stepIcon">↓</div>
+              </div>
+              <div class="stepN">Step 4</div>
+              <div class="stepT">Withdraw</div>
+              <div class="stepD">
+                Withdrawals are permissionless and trustless.
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -314,40 +448,37 @@
           <div class="sectionHeader">
             <h2 class="decode-text">See how we're different.</h2>
             <p class="decode-text">
+              Shielded execution without the tradeoffs.
             </p>
           </div>
 
           <div class="tableWrap" role="region" aria-label="Feature comparison">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Feature</th>
-                  <th scope="col">ShieldTX</th>
-                  <th scope="col">Direct Hyperliquid</th>
-                  <th scope="col">Multi-wallet Rotation</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Execution Shielding</strong></td>
-                  <td>✓</td>
-                  <td>✗</td>
-                  <td>✗</td>
-                </tr>
-                <tr>
-                  <td><strong>Copy-bot Resistance</strong></td>
-                  <td>✓</td>
-                  <td>✗</td>
-                  <td>✗</td>
-                </tr>
-                <tr>
-                  <td><strong>Operational Overhead</strong></td>
-                  <td>✓</td>
-                  <td>✓</td>
-                  <td>✗</td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="compare-table compare-table-3">
+              <div class="ctrow chead">
+                <div></div>
+                <div class="us">ShieldTX</div>
+                <div>Direct Hyperliquid</div>
+                <div>Multi-wallet Rotation</div>
+              </div>
+              <div class="ctrow">
+                <div>Execution Shielding</div>
+                <div class="us">✓</div>
+                <div>✗</div>
+                <div>✗</div>
+              </div>
+              <div class="ctrow">
+                <div>Copy-bot Resistance</div>
+                <div class="us">✓</div>
+                <div>✗</div>
+                <div>✗</div>
+              </div>
+              <div class="ctrow">
+                <div>Operational Overhead</div>
+                <div class="us">✓</div>
+                <div>✓</div>
+                <div>✗</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -356,23 +487,16 @@
         <div class="container">
           <div class="sectionHeader">
             <h2 class="decode-text">Copy traders cost you up to 100bps per trade. ShieldTX costs 10bps round trip.</h2>
-            <p class="decode-text">5bps on entry, 5bps on exit.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section textPlainSection" aria-label="Cost comparison">
-        <div class="container">
-          <div class="callout breaker">
-            <div>
-              <h2 class="decode-text">The leak costs more than the fix.</h2>
-              <p class="decode-text">
-                Copy traders could take up to 100bps per trade. Shield TX costs 10bps round trip.
-              </p>
+            <div class="price-pills">
+              <div class="ppill"><span class="mono">5bps</span><span class="ppill-label">ENTRY</span><span class="ppill-note">&nbsp;</span></div>
+              <div class="ppill-plus">+</div>
+              <div class="ppill"><span class="mono">5bps</span><span class="ppill-label">EXIT</span><span class="ppill-note">(Only on Profit)</span></div>
             </div>
           </div>
         </div>
       </section>
+
+
 
       <section class="section textPlainSection">
         <div class="container">
@@ -525,6 +649,8 @@
         </div>
       </section>
     </main>
+
+    </div><!-- /.boundary-container -->
 
     <footer class="footer">
       <div class="container footerInner">
@@ -709,8 +835,8 @@
       }, 25);
     }
 
-    // Initialize visual cipher decode elements — h1 only
-    const decodeElements = document.querySelectorAll('h1');
+    // Initialize visual cipher decode elements — headings (h1, h2, h3) with .decode-text class
+    const decodeElements = document.querySelectorAll('h1.decode-text, h2.decode-text, h3.decode-text');
     const decodedTexts = new WeakMap();
 
     decodeElements.forEach(el => {
