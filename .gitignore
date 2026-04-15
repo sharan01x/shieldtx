@@ -35,8 +35,8 @@ npm-debug.log*
 *.tmp
 *.temp
 
-# Vite dev server (local only)
-package.json
-package-lock.json
-vite.config.js
+# Vite dev server (local only — NOT gitignored anymore; needed for CI build)
+# package.json
+# package-lock.json
+# vite.config.js
 opencode.jsonc
