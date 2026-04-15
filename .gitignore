@@ -40,3 +40,4 @@ npm-debug.log*
 # package-lock.json
 # vite.config.js
 opencode.jsonc
+screenshot-*.png

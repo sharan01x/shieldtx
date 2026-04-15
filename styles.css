@@ -273,51 +273,104 @@
   }
 }
 
-/* Fractal glass overlay — full page striated glass effect */
+/* ═══════════════════════════════════════════════════════════════
+   Fractal glass overlay — striated glass panels with refraction
+ 
+   Layer stack (bottom → top):
+   1. Base tint + backdrop blur  (element itself)
+   2. Glass panel faces          (::before — translucent bars)
+   3. Specular edge highlights   (::after — bright left edges)
+ 
+   Each "glass panel" is 5px wide:
+   ┃██░░░░░░░░░░░░░░┃  ← bright specular edge (left highlight)
+   ┃████░░░░░░░░░░░░┃  ← glass face (slightly tinted, semi-transparent)
+   ┃░░░░░░░░░░░░░░░░┃  ← gap between panels
+   ┃░░░░░░░░░░░░░░░░┃  ← gap (shows blurred background through)
+ 
+   The backdrop-filter on the element provides the blur that makes
+   everything behind look "refracted," while the gradients on
+   ::before and ::after simulate the physical glass surfaces.
+   ═══════════════════════════════════════════════════════════════ */
 .fractal-overlay {
   position: fixed;
   inset: 0;
-  z-index: 0.5;
+  z-index: 1;
   pointer-events: none;
   overflow: hidden;
+  /* Layer 0: backdrop blur + subtle blue tint (warm-cool refraction split) */
+  backdrop-filter: blur(1px) saturate(120%) brightness(102%);
+  -webkit-backdrop-filter: blur(1px) saturate(120%) brightness(102%);
+  background: rgba(0, 89, 223, 0.03);
 }
 
+/* Layer 1: Glass panel faces — the translucent bars between gaps */
 .fractal-overlay::before {
   content: '';
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(28px) saturate(140%);
-  -webkit-backdrop-filter: blur(28px) saturate(140%);
-  background: rgba(0, 89, 223, 0.06);
+  background:
+    /* Primary glass faces: 2px translucent bar every 12px */
+    repeating-linear-gradient(90deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(255,255,255,0.07) 3px,
+      rgba(255,255,255,0.07) 5px,
+      rgba(255,255,255,0.04) 5px,
+      rgba(255,255,255,0.04) 6px,
+      transparent 6px,
+      transparent 12px
+    ),
+    /* Vertical intensity wave — glass is brighter at top */
+    linear-gradient(180deg,
+      rgba(255,255,255,0.08) 0%,
+      rgba(255,255,255,0.03) 35%,
+      rgba(255,255,255,0.01) 65%,
+      rgba(255,255,255,0.04) 100%
+    );
+  background-blend-mode: screen;
 }
 
+/* Layer 2: Specular highlights — bright left edges + faint chromatic split */
 .fractal-overlay::after {
   content: '';
   position: absolute;
   inset: 0;
   background:
+    /* Sharp specular highlight on left edge of each glass bar */
     repeating-linear-gradient(90deg,
-      rgba(255,255,255,0.14) 0px,
-      rgba(255,255,255,0.14) 1px,
-      transparent 1px,
+      transparent 0px,
+      transparent 2.5px,
+      rgba(255,255,255,0.45) 2.5px,
+      rgba(255,255,255,0.18) 3.5px,
       transparent 4px,
-      rgba(4,9,20,0.10) 4px,
-      rgba(4,9,20,0.10) 8px,
-      transparent 8px,
       transparent 12px
     ),
+    /* Chromatic aberration hint: red shifted 1px right of specular,
+       blue shifted 1px left — faint, just enough for glass-like iridescence */
     repeating-linear-gradient(90deg,
-      rgba(255,255,255,0.06) 0px,
-      transparent 2px,
-      transparent 14px
+      transparent 0px,
+      rgba(100,140,255,0.06) 1.5px,
+      rgba(100,140,255,0.03) 2.5px,
+      transparent 3.5px,
+      transparent 5px,
+      rgba(255,100,80,0.04) 5px,
+      rgba(255,100,80,0.02) 6px,
+      transparent 7px,
+      transparent 12px
     ),
+    /* Top-to-bottom specular intensity curve (light source from above) */
     linear-gradient(180deg,
-      rgba(255,255,255,0.10) 0%,
-      rgba(4,9,20,0.08) 30%,
-      rgba(255,255,255,0.06) 60%,
-      rgba(4,9,20,0.05) 100%);
-  background-blend-mode: overlay;
-  box-shadow: -2.23px -2.23px 1.11px rgba(255,255,255,0.20) inset;
+      rgba(255,255,255,0.12) 0%,
+      rgba(255,255,255,0.04) 40%,
+      transparent 70%,
+      rgba(255,255,255,0.03) 100%
+    );
+  background-blend-mode: screen;
+  /* Subtle inset shadow simulating the glass panel casting a tiny shadow 
+     to the bottom-right of each bar edge */
+  box-shadow:
+    0.5px 1px 0.5px rgba(0,0,0,0.06) inset,
+    -0.3px -0.3px 0.8px rgba(255,255,255,0.15) inset;
 }
 
 /* Dark mode glow enhancement */
@@ -328,6 +381,67 @@
 .themeDark .heroGlowFallback::before,
 .themeDark .heroGlowFallback::after {
   opacity: 0.5;
+}
+
+/* Dark mode glass overlay — brighter specular, warmer tint, less visible panel faces */
+.themeDark .fractal-overlay {
+  background: rgba(120, 160, 255, 0.04);
+  backdrop-filter: blur(0.5px) saturate(130%) brightness(102%);
+  -webkit-backdrop-filter: blur(0.5px) saturate(130%) brightness(102%);
+}
+
+.themeDark .fractal-overlay::before {
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(255,255,255,0.09) 3px,
+      rgba(255,255,255,0.09) 5px,
+      rgba(255,255,255,0.05) 5px,
+      rgba(255,255,255,0.05) 6px,
+      transparent 6px,
+      transparent 12px
+    ),
+    linear-gradient(180deg,
+      rgba(255,255,255,0.06) 0%,
+      rgba(255,255,255,0.02) 35%,
+      transparent 65%,
+      rgba(255,255,255,0.03) 100%
+    );
+  background-blend-mode: screen;
+}
+
+.themeDark .fractal-overlay::after {
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0px,
+      transparent 2.5px,
+      rgba(255,255,255,0.55) 2.5px,
+      rgba(255,255,255,0.22) 3.5px,
+      transparent 4px,
+      transparent 12px
+    ),
+    repeating-linear-gradient(90deg,
+      transparent 0px,
+      rgba(80,120,255,0.08) 1.5px,
+      rgba(80,120,255,0.04) 2.5px,
+      transparent 3.5px,
+      transparent 5px,
+      rgba(255,80,60,0.05) 5px,
+      rgba(255,80,60,0.03) 6px,
+      transparent 7px,
+      transparent 12px
+    ),
+    linear-gradient(180deg,
+      rgba(255,255,255,0.15) 0%,
+      rgba(255,255,255,0.06) 40%,
+      transparent 70%,
+      rgba(255,255,255,0.04) 100%
+    );
+  background-blend-mode: screen;
+  box-shadow:
+    0.5px 1px 0.5px rgba(0,0,0,0.08) inset,
+    -0.3px -0.3px 1px rgba(255,255,255,0.2) inset;
 }
 
 /* Reduced motion - disable animation for accessibility */

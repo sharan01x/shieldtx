@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShieldTX — Shielded Execution on Hyperliquid. Your Edge Stays Yours.</title>
+  <title>Shield TX — Stop Trading In Public</title>
   <meta name="description"
-    content="Copy traders are bleeding 15bps per trade from your Hyperliquid positions. ShieldTX shields your execution so your entries, sizing, and exits stay off their radar." />
+    content="Your Hyperliquid positions are live on 12+ copy bot feeds in seconds. Shield TX breaks the signal. Same fills, zero footprint." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=SUSE:wght@100..900&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
         <div class="headerBrand">
           <div class="brand" aria-label="ShieldTX">
             <a href="index.html">
-              <img src="logoOption3.svg" alt="ShieldTX" class="brandLogo" />
+              <img src="logoOption3.svg" alt="Shield TX" class="brandLogo" />
             </a>
           </div>
         </div>
@@ -61,27 +61,21 @@
         <div class="heroContent">
           <div class="container heroGrid">
           <div class="heroCopy">
-            <p class="eyebrow decode-text">Your trades keep getting copied.</p>
+            <p class="eyebrow decode-text">Private Beta · v0.1</p>
             <h1 class="decode-text">
-              Your trades keep getting copied.
+              Stop Trading In Public
             </h1>
             <p class="lead decode-text">
-              Shield your perp trades on Hyperliquid. Same fills, zero footprint.
+              Your Hyperliquid positions are live on 12+ copy bot feeds in seconds. Shield TX breaks the signal. Same fills, zero footprint.
             </p>
 
             <div class="heroActions">
-              <a class="btn btnPrimary" href="#early-access">
-                Request Access
+              <a class="btn btnPrimary" href="#wallet-scanner">
+                Check Your Exposure
               </a>
-              <a class="btn btnGhost" href="#features">
-                Explore Features
+              <a class="btn btnGhost" href="#how">
+                See how it works
               </a>
-            </div>
-
-            <div class="pillRow" aria-label="Highlights">
-              <span class="pill">Same fills as native Hyperliquid</span>
-              <span class="pill">15bps cost gap closed</span>
-              <span class="pill">Zero clustering exposure</span>
             </div>
           </div>
 
@@ -114,18 +108,18 @@
         </div>
       </section>
 
-      <section id="exposure" class="section sectionNavy" aria-label="Check your exposure">
+      <section id="wallet-scanner" class="section sectionNavy" aria-label="Check your exposure">
         <div class="container">
           <div class="sectionHeader">
             <h2 class="decode-text">See who's copying your trades.</h2>
             <p class="lead decode-text">
-              Enter your wallet address to see correlated wallets, avg lag time, est. alpha leakage, and top correlated wallets with trade counts.
+              Correlated wallets. Average lag. Estimated alpha leakage. Enter your wallet — no connection required.
             </p>
           </div>
 
           <div class="exposureScanner">
             <div class="exposureForm">
-              <input type="text" id="walletInput" class="walletInput" placeholder="Enter your wallet address." pattern="^0x[a-fA-F0-9]{40}$"
+              <input type="text" id="walletInput" class="walletInput" placeholder="0x…" pattern="^0x[a-fA-F0-9]{40}$"
                 spellcheck="false" autocomplete="off" />
               <button id="scanBtn" class="btn btnLight" disabled>
                 Scan
@@ -168,82 +162,6 @@
             </div>
           </div>
 
-          <div id="scanResults" class="scanResults hidden">
-            <div class="resultsHeader">
-              <h3>Your exposure report</h3>
-              <p id="resultNote">Based on <span id="fillCount">0</span> fills over 7 days. Account value: <span
-                  id="accountValue">$0</span>.</p>
-            </div>
-
-            <div class="resultStats">
-              <div class="resultStat">
-                <div class="resultStatV" id="correlatedCount">4</div>
-                <div class="resultStatK">Correlated Wallets</div>
-              </div>
-              <div class="resultStat">
-                <div class="resultStatV" id="avgLag">4.8s</div>
-                <div class="resultStatK">Avg Lag Time</div>
-              </div>
-              <div class="resultStat">
-                <div class="resultStatV" id="alphaLeak">6bps</div>
-                <div class="resultStatK">Est. Alpha Leakage</div>
-              </div>
-            </div>
-
-            <div class="resultsBody">
-              <div class="correlatedWallets">
-                <p class="correlatedLabel">Top correlated wallets</p>
-                <div id="walletList" class="walletList">
-                  <div class="walletItem">
-                    <span class="walletAddr">0x52fc...9630</span>
-                    <span class="walletTrades">42 trades</span>
-                  </div>
-                  <div class="walletItem">
-                    <span class="walletAddr">0xeb85...2fc9</span>
-                    <span class="walletTrades">28 trades</span>
-                  </div>
-                  <div class="walletItem">
-                    <span class="walletAddr">0x0da7...41eb</span>
-                    <span class="walletTrades">22 trades</span>
-                  </div>
-                  <div class="walletItem">
-                    <span class="walletAddr">0x741e...b852</span>
-                    <span class="walletTrades">18 trades</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="ecosystemInfo">
-                <h4>Why this matters</h4>
-                <div class="toolBadges">
-                  <span class="toolBadge">Dexly</span>
-                  <span class="toolBadge">HyperDash</span>
-                  <span class="toolBadge">CoinGlass</span>
-                  <span class="toolBadge">Nansen</span>
-                  <span class="toolBadge">Hyperbot</span>
-                  <span class="toolBadge">Arkham</span>
-                  <span class="toolBadge">+ 6 more</span>
-                </div>
-                <p>
-                  Every open position on Hyperliquid is queryable by anyone, in real-time.
-                  These wallets are likely following your trades within seconds.
-                </p>
-
-                <div class="walletRotationMini">
-                  <p><strong>Wallet rotation doesn't work.</strong> Arkham clusters multi-wallet setups into single
-                    entities by funding patterns and trade timing.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="resultsFooter">
-              <p class="resultDisclaimer">Estimated exposure based on simulated analysis. Full correlation scan
-                available in beta.</p>
-              <a class="btn btnPrimary" href="#early-access">
-                Shield these positions. Request early access.
-              </a>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -322,11 +240,11 @@
             <article class="fcard">
               <div class="fhead">
                 <div class="ficon">⊘</div>
-                <h3>Copy-bot resistant by design</h3>
+                <h3>Compliant by design</h3>
               </div>
               <ul>
-                <li>Break the signal copy bots rely on</li>
-                <li>No mirrored entries, no crowded exits</li>
+                <li>Verification available for higher limits</li>
+                <li>Geo-blocking and sanction compliant</li>
               </ul>
               <div class="fvisual fv-bot" aria-hidden="true">
                 <div class="botdot d1"></div>
@@ -391,10 +309,10 @@
         </div>
       </section>
 
-      <section class="section textPlainSection">
+      <section id="how" class="section textPlainSection">
         <div class="container">
           <div class="sectionHeader">
-            <h2 class="decode-text">Four steps. Zero footprint.</h2>
+            <h2 class="decode-text">Three steps. Zero footprint.</h2>
             <p class="decode-text">
             </p>
           </div>
@@ -404,9 +322,9 @@
                 <div class="stepIcon">🔒</div>
               </div>
               <div class="stepN">Step 1</div>
-              <div class="stepT">Deposit</div>
+              <div class="stepT">Add Funds</div>
               <div class="stepD">
-                Your funds are deposited into a vault contract on Arbitrum.
+                Deposited funds are secured by the Shield TX vault on Arbitrum.
               </div>
             </article>
             <article class="stepCard">
@@ -414,9 +332,9 @@
                 <div class="stepIcon">↗</div>
               </div>
               <div class="stepN">Step 2</div>
-              <div class="stepT">Trade</div>
+              <div class="stepT">Open Trade</div>
               <div class="stepD">
-                You place trades from a fresh, unlinkable wallet on Hyperliquid.
+                Confidential trades placed from a fresh, unlinkable wallet on Hyperliquid.
               </div>
             </article>
             <article class="stepCard">
@@ -424,21 +342,12 @@
                 <div class="stepIcon">⊘</div>
               </div>
               <div class="stepN">Step 3</div>
-              <div class="stepT">Close</div>
+              <div class="stepT">Close Trade</div>
               <div class="stepD">
-                You can keep trading or re-shield for maximum unlinkability.
+                Continue trading or re-shield balance for maximum unlinkability.
               </div>
             </article>
-            <article class="stepCard">
-              <div class="stepVisual stepVisual-4">
-                <div class="stepIcon">↓</div>
-              </div>
-              <div class="stepN">Step 4</div>
-              <div class="stepT">Withdraw</div>
-              <div class="stepD">
-                Withdrawals are permissionless and trustless.
-              </div>
-            </article>
+
           </div>
         </div>
       </section>
@@ -456,27 +365,33 @@
             <div class="compare-table compare-table-3">
               <div class="ctrow chead">
                 <div></div>
-                <div class="us">ShieldTX</div>
+                <div class="us">Shield TX</div>
                 <div>Direct Hyperliquid</div>
-                <div>Multi-wallet Rotation</div>
+                <div>Multi-Wallet</div>
               </div>
               <div class="ctrow">
-                <div>Execution Shielding</div>
+                <div>Position Confidentiality</div>
                 <div class="us">✓</div>
                 <div>✗</div>
                 <div>✗</div>
               </div>
               <div class="ctrow">
-                <div>Copy-bot Resistance</div>
+                <div>Non-custodial</div>
+                <div class="us">✓</div>
+                <div>✓</div>
+                <div>✓</div>
+              </div>
+              <div class="ctrow">
+                <div>Copy-bot resistant</div>
                 <div class="us">✓</div>
                 <div>✗</div>
                 <div>✗</div>
               </div>
               <div class="ctrow">
                 <div>Operational Overhead</div>
-                <div class="us">✓</div>
-                <div>✓</div>
-                <div>✗</div>
+                <div class="us">Low</div>
+                <div>Low</div>
+                <div>High</div>
               </div>
             </div>
           </div>
@@ -486,11 +401,11 @@
       <section id="pricing" class="section sectionNavy">
         <div class="container">
           <div class="sectionHeader">
-            <h2 class="decode-text">Copy traders cost you up to 100bps per trade. ShieldTX costs 10bps round trip.</h2>
+            <h2 class="decode-text">The leak costs more than the fix.</h2>
             <div class="price-pills">
-              <div class="ppill"><span class="mono">5bps</span><span class="ppill-label">ENTRY</span><span class="ppill-note">&nbsp;</span></div>
+              <div class="ppill"><span class="mono">5bps</span><span class="ppill-label">entry</span><span class="ppill-note">&nbsp;</span></div>
               <div class="ppill-plus">+</div>
-              <div class="ppill"><span class="mono">5bps</span><span class="ppill-label">EXIT</span><span class="ppill-note">(Only on Profit)</span></div>
+              <div class="ppill"><span class="mono">5bps</span><span class="ppill-label">exit</span></div>
             </div>
           </div>
         </div>
@@ -504,33 +419,32 @@
             <div>
               <h2 class="decode-text">Shielded execution. Not a mixer.</h2>
               <p class="decode-text">
-                ShieldTX executes natively on Hyperliquid — same order book, same fills. Built for full auditability
-                with no obfuscation architecture.
+                Native execution. Full auditability. Zero obfuscation.
               </p>
             </div>
             <ol class="steps shielded-steps">
               <li class="step">
                 <div class="stepCheck">✓</div>
                 <div class="stepBody">
-                  <div class="stepT">Deposit screening against sanctions lists</div>
+                  <div class="stepT">Deposit screening</div>
                 </div>
               </li>
               <li class="step">
                 <div class="stepCheck">✓</div>
                 <div class="stepBody">
-                  <div class="stepT">Geographic blocking at the frontend</div>
+                  <div class="stepT">Geographic blocking</div>
                 </div>
               </li>
               <li class="step">
                 <div class="stepCheck">✓</div>
                 <div class="stepBody">
-                  <div class="stepT">Optional verification for higher limits</div>
+                  <div class="stepT">Optional verification</div>
                 </div>
               </li>
               <li class="step">
                 <div class="stepCheck">✓</div>
                 <div class="stepBody">
-                  <div class="stepT">Viewing keys for audits &amp; reporting</div>
+                  <div class="stepT">Viewing keys</div>
                 </div>
               </li>
             </ol>
@@ -542,14 +456,14 @@
         <div class="container">
           <div class="sectionHeader">
             <h2 class="decode-text">Questions. Answered.</h2>
-            <p class="decode-text">Everything you need to know before getting started.</p>
+
           </div>
 
           <div class="faq">
             <details class="faqItem">
               <summary>Is this like Tornado Cash?</summary>
               <div class="faqBody">
-                No. Shield TX doesn't pool funds or obfuscate transactions. It executes natively on Hyperliquid — same order book, same counterparties, fully on-chain. The difference: Tornado Cash hides the transaction. Shield TX shields your position data. Execution stays transparent. Your strategy doesn't.
+                No. Shield TX doesn't pool funds or obfuscate transactions. It executes natively on Hyperliquid — same order book, same counterparties, fully on-chain. Tornado Cash hides the transaction; Shield TX shields your position data. Execution stays transparent. Your strategy doesn't.
               </div>
             </details>
 
@@ -575,25 +489,13 @@
             </details>
 
             <details class="faqItem">
-              <summary>Who controls the vault / my funds?</summary>
+              <summary>Who controls the vault and my funds?</summary>
               <div class="faqBody">
-                You do. Funds are locked in a smart contract on Arbitrum — core operations are permissionless and verified by zero-knowledge proofs, no admin key required. See the full breakdown in the trust model.
+                You do. Funds are locked in a smart contract on Arbitrum — core operations are permissionless and verified by zero-knowledge proofs, no admin key required.
               </div>
             </details>
 
-            <details class="faqItem">
-              <summary>What happens during a major market event?</summary>
-              <div class="faqBody">
-                [TBD — pending performance under load documentation]
-              </div>
-            </details>
 
-            <details class="faqItem">
-              <summary>What's the audit status?</summary>
-              <div class="faqBody">
-                [TBD — confirm with team before publishing]
-              </div>
-            </details>
 
             <details class="faqItem">
               <summary>Is there an API?</summary>
@@ -619,13 +521,13 @@
                 Email address
               </label>
               <input id="email" name="email" type="email" autocomplete="email" inputmode="email"
-                placeholder="you@domain.com" required />
+                placeholder="your@email.com" required />
               <button class="btn btnPrimary" type="submit">
                 Request Access
               </button>
             </form>
             <p class="fineprint">
-              No spam. One email to schedule. (Hook this form to your backend later.)
+              Private Beta · v0.1
             </p>
           </div>
         </div>
@@ -655,9 +557,9 @@
     <footer class="footer">
       <div class="container footerInner">
         <div class="footerBrand">
-          <div class="brandName">ShieldTX</div>
+          <div class="brandName">Shield TX</div>
           <div class="footerNote">
-            Powered by
+            Trade with confidence. Powered by
             <a href="https://availproject.org" target="_blank" rel="noreferrer">
               Avail
             </a>
@@ -671,117 +573,13 @@
           <a href="roadmap.html">Roadmap</a>
           <a href="#faq">FAQ</a>
         </div>
-        <div class="footerCopy">© <span id="year"></span> ShieldTX. All rights reserved.</div>
+        <div class="footerCopy">© <span id="year"></span> Shield TX. All rights reserved.</div>
       </div>
     </footer>
   </div>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Exposure Scanner
-    const walletInput = document.getElementById('walletInput');
-    const scanBtn = document.getElementById('scanBtn');
-    const scanStatus = document.getElementById('scanStatus');
-    const scanStatusText = document.getElementById('scanStatusText');
-    const scanResults = document.getElementById('scanResults');
-    const correlatedCount = document.getElementById('correlatedCount');
-    const avgLag = document.getElementById('avgLag');
-    const alphaLeak = document.getElementById('alphaLeak');
-    const walletList = document.getElementById('walletList');
-    const fillCount = document.getElementById('fillCount');
-    const accountValue = document.getElementById('accountValue');
-
-    const statusMessages = [
-      'Querying on-chain data...',
-      'Analyzing fill patterns...',
-      'Detecting correlated wallets...',
-      'Calculating alpha leakage...',
-      'Building exposure report...'
-    ];
-
-    const simulatedWallets = [
-      { addr: '0x52fc', trades: 42 },
-      { addr: '0xeb85', trades: 28 },
-      { addr: '0x0da7', trades: 22 },
-      { addr: '0x741e', trades: 18 },
-      { addr: '0xa3f9', trades: 15 },
-      { addr: '0xc1d8', trades: 12 },
-      { addr: '0x9e4b', trades: 9 },
-      { addr: '0xf2a6', trades: 6 }
-    ];
-
-    function isValidEthAddress(addr) {
-      return /^0x[a-fA-F0-9]{40}$/.test(addr);
-    }
-
-    function generateRandomResults() {
-      const count = Math.floor(Math.random() * 5) + 2;
-      const wallets = [];
-      const usedIndices = new Set();
-
-      for (let i = 0; i < count; i++) {
-        let idx;
-        do {
-          idx = Math.floor(Math.random() * simulatedWallets.length);
-        } while (usedIndices.has(idx) && usedIndices.size < simulatedWallets.length);
-        usedIndices.add(idx);
-
-        const w = simulatedWallets[idx];
-        wallets.push({
-          addr: w.addr + '...' + Math.random().toString(16).slice(2, 6),
-          trades: w.trades + Math.floor(Math.random() * 10)
-        });
-      }
-
-      return {
-        correlatedWallets: count,
-        avgLag: (Math.random() * 5 + 2).toFixed(1),
-        alphaLeak: Math.floor(Math.random() * 10 + 3),
-        fills: Math.floor(Math.random() * 50) + 10,
-        accountVal: (Math.random() * 100000 + 5000).toFixed(0),
-        wallets: wallets.sort((a, b) => b.trades - a.trades)
-      };
-    }
-
-    function renderResults(data) {
-      correlatedCount.textContent = data.correlatedWallets;
-      avgLag.textContent = data.avgLag + 's';
-      alphaLeak.textContent = data.alphaLeak + 'bps';
-      fillCount.textContent = data.fills;
-      accountValue.textContent = '$' + parseInt(data.accountVal).toLocaleString();
-
-      walletList.innerHTML = data.wallets.map(w => `
-          <div class="walletItem">
-            <span class="walletAddr">${w.addr}</span>
-            <span class="walletTrades">${w.trades} trades</span>
-          </div>
-        `).join('');
-    }
-
-    walletInput.addEventListener('input', () => {
-      scanBtn.disabled = !isValidEthAddress(walletInput.value);
-    });
-
-    scanBtn.addEventListener('click', async () => {
-      scanBtn.disabled = true;
-      scanStatus.classList.remove('hidden');
-      scanResults.classList.add('hidden');
-
-      for (let i = 0; i < statusMessages.length; i++) {
-        scanStatusText.textContent = statusMessages[i];
-        await new Promise(r => setTimeout(r, 600));
-      }
-
-      const results = generateRandomResults();
-      renderResults(results);
-
-      scanStatus.classList.add('hidden');
-      scanResults.classList.remove('hidden');
-      scanBtn.disabled = false;
-    });
-
-    // Scan scanner logic complete
 
     // ═══════════════════════════════════════════════
     // Visual Cipher Decode Effect
@@ -891,11 +689,11 @@
       // Navy #151F28, Red Signal #EC3910, Blue Electric #231EF7
       // Cyan #00E5FF, Pink #FF1493
       const blobs = [
-        { homeX: 0.80, homeY: 0.70, x: 0.80, y: 0.70, radius: 0.5, color: [21, 31, 40], freq: 0.0006 },   // Navy
-        { homeX: 0.15, homeY: 0.15, x: 0.15, y: 0.15, radius: 0.45, color: [236, 57, 16], freq: 0.001 },  // Red Signal
-        { homeX: 0.55, homeY: 0.30, x: 0.55, y: 0.30, radius: 0.40, color: [35, 30, 247], freq: 0.0007 }, // Blue Electric
-        { homeX: 0.25, homeY: 0.45, x: 0.25, y: 0.45, radius: 0.35, color: [0, 229, 255], freq: 0.0009 }, // Cyan
-        { homeX: 0.70, homeY: 0.20, x: 0.70, y: 0.20, radius: 0.40, color: [255, 20, 147], freq: 0.0008 },// Pink
+        { homeX: 0.80, homeY: 0.70, x: 0.80, y: 0.70, radius: 0.5, color: [21, 31, 40], freq: 0.00078 },   // Navy
+        { homeX: 0.15, homeY: 0.15, x: 0.15, y: 0.15, radius: 0.45, color: [236, 57, 16], freq: 0.0013 },  // Red Signal
+        { homeX: 0.55, homeY: 0.30, x: 0.55, y: 0.30, radius: 0.40, color: [35, 30, 247], freq: 0.00091 }, // Blue Electric
+        { homeX: 0.25, homeY: 0.45, x: 0.25, y: 0.45, radius: 0.35, color: [0, 229, 255], freq: 0.00117 }, // Cyan
+        { homeX: 0.70, homeY: 0.20, x: 0.70, y: 0.20, radius: 0.40, color: [255, 20, 147], freq: 0.00104 },// Pink
       ];
 
       // Resize canvas to match container
@@ -924,8 +722,8 @@
           const targetY = blob.homeY + Math.cos(time * blob.freq * 1.3) * 0.12;
 
           // Smooth easing toward target
-          blob.x += (targetX - blob.x) * 0.02;
-          blob.y += (targetY - blob.y) * 0.02;
+          blob.x += (targetX - blob.x) * 0.026;
+          blob.y += (targetY - blob.y) * 0.026;
 
           const radius = blob.radius * Math.min(w, h);
 
