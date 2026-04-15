@@ -1106,6 +1106,7 @@ footer {
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   margin: 0 var(--space-xl) var(--space-xl);
+  box-shadow: var(--shadow-sm);
 }
 
 .sectionSurface {
@@ -1114,6 +1115,7 @@ footer {
   margin: 0 var(--space-xl) var(--space-xl);
   padding: var(--space-4xl) 0;
   border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .sectionHeader {
@@ -1658,8 +1660,8 @@ footer {
 /* New horizontal step cards grid - like feature cards */
 .stepsGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-xl);
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2xl);
   margin-top: var(--space-2xl);
 }
 
@@ -1972,6 +1974,7 @@ footer {
   color: var(--grey);
   border-radius: var(--radius-xl);
   margin: 0 var(--space-xl) var(--space-xl);
+  box-shadow: var(--shadow-md);
 }
 
 .sectionNavy .sectionHeader h2,
